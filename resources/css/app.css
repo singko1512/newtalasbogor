@@ -131,18 +131,25 @@
     transition-duration: 90ms;
 }
 
-/* Lapisan fotografis Hero satu layar penuh dengan kontras teks terjaga */
+/* Lapisan fotografis Hero dengan gradasi asimetris agar teks kiri terbaca tajam */
 .talas-hero-scrim {
     background:
-        radial-gradient(ellipse 64% 48% at 50% 20%, rgba(7, 21, 15, 0.76) 0%, rgba(11, 32, 23, 0.34) 68%, rgba(11, 32, 23, 0.1) 100%),
-        linear-gradient(180deg, rgba(7, 21, 15, 0.56) 0%, rgba(11, 32, 23, 0.32) 45%, rgba(7, 21, 15, 0.74) 100%);
+        linear-gradient(180deg, rgba(7, 21, 15, 0.88) 0%, rgba(11, 32, 23, 0.78) 54%, rgba(7, 21, 15, 0.92) 100%);
 }
 
-/* Elevasi kartu putih hero di depan foto latar penuh */
+@media (min-width: 1024px) {
+    .talas-hero-scrim {
+        background:
+            linear-gradient(96deg, rgba(7, 21, 15, 0.93) 0%, rgba(11, 32, 23, 0.83) 46%, rgba(11, 32, 23, 0.42) 82%, rgba(7, 21, 15, 0.62) 100%),
+            linear-gradient(180deg, rgba(7, 21, 15, 0.52) 0%, rgba(7, 21, 15, 0.08) 32%, rgba(7, 21, 15, 0.16) 70%, rgba(7, 21, 15, 0.72) 100%);
+    }
+}
+
+/* Elevasi panel rekapitulasi hero di depan foto latar penuh */
 .talas-hero-sheet {
     box-shadow:
-        0 28px 64px -16px rgba(5, 16, 11, 0.54),
-        0 8px 20px -4px rgba(5, 16, 11, 0.3);
+        0 28px 64px -16px rgba(5, 16, 11, 0.58),
+        0 8px 20px -4px rgba(5, 16, 11, 0.34);
 }
 
 /* Penanda kiri terarah pada baris panel rekap yang bisa diklik */

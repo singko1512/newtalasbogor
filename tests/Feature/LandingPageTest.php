@@ -15,8 +15,11 @@ class LandingPageTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('TALAS BOGOR');
         $response->assertSee('Portal Layanan &amp; Aplikasi Digital', false);
-        $response->assertSee('Selamat Datang di Portal TALAS BOGOR');
+        $response->assertSee('Dinas Komunikasi dan Informatika Kabupaten Bogor');
+        $response->assertSee('Pusat layanan domain, hosting, email dinas, audit keamanan aplikasi, serta tiket penanganan gangguan resmi Pemerintah Kabupaten Bogor.');
+        $response->assertDontSee('Selamat Datang di Portal TALAS BOGOR');
         $response->assertSee('Rekapitulasi Layanan Kabupaten Bogor');
+        $response->assertSee('Layanan digital terdata');
         $response->assertSee('bg-[#d49b35]');
         $response->assertSee('images/logo-pemkab-bogor.png');
         $response->assertSee('images/logo-diskominfo-bogorkab.png');

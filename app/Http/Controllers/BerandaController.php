@@ -209,27 +209,6 @@ class BerandaController extends Controller
             ];
         }
 
-        $appMeta = $talas['direktori']['aplikasi'] ?? [];
-        $appAktif = '195';
-        foreach ($appMeta['kartu_kpi'] ?? [] as $kpi) {
-            if (($kpi['kode'] ?? '') === 'aktif' && isset($kpi['nilai'])) {
-                $appAktif = (string) $kpi['nilai'];
-                break;
-            }
-        }
-        $appTotal = (string) ($appMeta['total_item'] ?? 239);
-        $appOpd = (string) ($appMeta['total_baris_asli'] ?? 42);
-
-        $spbe = $talas['spbe'] ?? [];
-        $skmMeta = [];
-        foreach ($talas['ekosistem'] ?? [] as $eco) {
-            if (($eco['kode'] ?? '') === 'skm') {
-                $skmMeta = $eco;
-                break;
-            }
-        }
-        $skmPositif = (string) ($skmMeta['positif_persen'] ?? '63,2%');
-
         $compositionLabel = sprintf(
             'Komposisi %d layanan: %d Website desa.id (%s), %d Aplikasi OPD (%s), dan %d Website bogorkab.go.id (%s)',
             $totalLayanan,
@@ -245,26 +224,6 @@ class BerandaController extends Controller
             'katalog_count' => count($talas['layanan_utama'] ?? []),
             'total_layanan' => $totalLayanan,
             'composition_label' => $compositionLabel,
-            'highlights' => [
-                [
-                    'label' => 'Aplikasi Aktif',
-                    'angka' => $appAktif,
-                    'konteks' => sprintf('dari %s aplikasi · %s OPD', $appTotal, $appOpd),
-                    'nilai' => sprintf('%s dari %s (%s OPD)', $appAktif, $appTotal, $appOpd),
-                ],
-                [
-                    'label' => 'Indeks SPBE 2025',
-                    'angka' => (string) ($spbe['indeks_2025'] ?? '4,34'),
-                    'konteks' => sprintf('Predikat %s', $spbe['predikat_2025'] ?? 'MEMUASKAN'),
-                    'nilai' => sprintf('%s (%s)', $spbe['indeks_2025'] ?? '4,34', $spbe['predikat_2025'] ?? 'MEMUASKAN'),
-                ],
-                [
-                    'label' => 'Kepuasan Masyarakat',
-                    'angka' => $skmPositif,
-                    'konteks' => sprintf('Positif · %s', $skmMeta['metrik'] ?? '14.737 Responden'),
-                    'nilai' => sprintf('%s (%s)', $skmMeta['metrik'] ?? '14.737 Responden', $skmPositif),
-                ],
-            ],
             'segments' => $segments,
         ];
     }

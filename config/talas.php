@@ -42,10 +42,8 @@ return [
     ],
 
     'hero' => [
-        'judul' => 'Portal Layanan & Aplikasi Digital Kabupaten Bogor',
-        'sambutan_judul' => 'Selamat Datang di Portal TALAS BOGOR',
-        'ringkasan' => 'Pusat layanan aplikasi, pengelolaan website instansi dan desa, serta tiket penanganan gangguan resmi Pemerintah Kabupaten Bogor.',
-        'catatan_tiket' => 'Mencakup permohonan domain bogorkab.go.id dan desa.id, hosting, email dinas, audit keamanan VA/Pentest, hingga 10 SOP resmi.',
+        'judul' => 'Portal Layanan & Aplikasi Digital',
+        'ringkasan' => 'Pusat layanan domain, hosting, email dinas, audit keamanan aplikasi, serta tiket penanganan gangguan resmi Pemerintah Kabupaten Bogor.',
     ],
 
     /*
@@ -81,7 +79,7 @@ return [
             'jumlah' => 416,
             'max_referensi' => 416,
             'bar_color' => '#0e7490',
-            'keterangan' => '416 desa terdaftar aktif menggunakan platform SIDEKA-NG',
+            'keterangan' => '416 desa aktif pada platform SIDEKA-NG',
             'sumber' => 'Direktori Desa.id',
         ],
         [
