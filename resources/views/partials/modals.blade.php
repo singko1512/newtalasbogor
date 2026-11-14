@@ -21,7 +21,7 @@
                      class="mt-0.5 h-10 w-10 shrink-0 select-none sm:h-11 sm:w-11">
                 <div class="min-w-0">
                     <div class="flex flex-wrap items-center gap-1.5 text-xs">
-                        <span data-modal-service-kategori class="font-bold text-[#926018]">
+                        <span data-modal-service-kategori class="font-bold text-[#784f14]">
                             Layanan TALAS BOGOR
                         </span>
                         <span class="text-[#c5d1c8]" aria-hidden="true">&middot;</span>
@@ -211,8 +211,8 @@
                             aria-controls="portal-panel-{{ $roleKey }}"
                             tabindex="{{ $loop->first ? '0' : '-1' }}"
                             data-portal-role="{{ $roleKey }}"
-                            class="talas-transition {{ $cellBorder }}relative z-10 flex min-h-[48px] w-full cursor-pointer items-center gap-2.5 px-3 py-2.5 text-left text-xs font-bold sm:px-4 sm:text-sm {{ $loop->first ? 'bg-[#edf2ed] text-[#10231b] shadow-[inset_3px_0_0_#926018]' : 'bg-white text-[#3f5249] hover:bg-[#f6f5f0]/70 hover:text-[#10231b]' }}">
-                        <i data-lucide="{{ $role['ikon'] ?? 'users' }}" class="h-4 w-4 shrink-0 text-[#926018] sm:h-[18px] sm:w-[18px]" aria-hidden="true"></i>
+                            class="talas-transition {{ $cellBorder }}relative z-10 flex min-h-[48px] w-full cursor-pointer items-center gap-2.5 px-3 py-2.5 text-left text-xs font-bold sm:px-4 sm:text-sm {{ $loop->first ? 'bg-[#edf2ed] text-[#10231b] shadow-[inset_3px_0_0_#784f14]' : 'bg-white text-[#3f5249] hover:bg-[#f6f5f0]/70 hover:text-[#10231b]' }}">
+                        <i data-lucide="{{ $role['ikon'] ?? 'users' }}" class="h-4 w-4 shrink-0 text-[#784f14] sm:h-[18px] sm:w-[18px]" aria-hidden="true"></i>
                         <span>{{ $role['tab_label'] ?? $role['peran'] }}</span>
                     </button>
                 @endforeach
@@ -236,18 +236,18 @@
 
                         @if (! empty($role['unit_bidang']))
                             <div class="mt-3 flex flex-wrap items-center gap-1.5">
-                                <span class="text-xs font-bold text-[#926018]">Unit pengelola:</span>
+                                <span class="text-xs font-bold text-[#784f14]">Unit pengelola:</span>
                                 @foreach ($role['unit_bidang'] as $unit)
                                     <span class="rounded border border-[#d6ded7] bg-[#f6f5f0] px-2.5 py-0.5 text-xs font-semibold text-[#10231b]">{{ $unit }}</span>
                                 @endforeach
                             </div>
                         @endif
 
-                        <h4 class="mt-4 text-xs font-bold text-[#926018]">Cakupan layanan</h4>
+                        <h4 class="mt-4 text-xs font-bold text-[#784f14]">Cakupan layanan</h4>
                         <ul class="mt-2 grid gap-x-6 gap-y-2 sm:grid-cols-2">
                             @foreach ($role['layanan'] ?? [] as $layanan)
                                 <li class="flex gap-2.5 text-sm leading-snug text-[#10231b]">
-                                    <span class="mt-[0.55rem] h-1 w-1 shrink-0 bg-[#926018]" aria-hidden="true"></span>
+                                    <span class="mt-[0.55rem] h-1 w-1 shrink-0 bg-[#784f14]" aria-hidden="true"></span>
                                     <span>{{ $layanan }}</span>
                                 </li>
                             @endforeach

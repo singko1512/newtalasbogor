@@ -11,14 +11,14 @@
     {{-- Panggung Atas Hero: Identitas Instansi & Judul Portal Terpusat --}}
     <div class="relative z-10 mx-auto w-full max-w-4xl px-4 text-center text-white sm:px-6 lg:px-8">
         <div data-hero-stagger
-             class="inline-flex max-w-full flex-wrap items-center justify-center gap-2.5 rounded-md border border-white/85 bg-white/96 px-3.5 py-1.5 shadow-[0_4px_18px_rgba(7,21,15,0.34)] sm:gap-3">
+             class="inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-lg border border-white/85 bg-white/96 px-3 py-1.5 shadow-[0_4px_18px_rgba(7,21,15,0.34)] sm:gap-3 sm:px-4">
             <img src="{{ asset('images/logo-diskominfo-bogorkab.png') }}"
                  alt="Diskominfo Kabupaten Bogor"
                  width="148"
                  height="35"
-                 class="h-6 w-auto object-contain sm:h-[26px]">
+                 class="h-5 w-auto object-contain sm:h-[26px]">
             <span class="hidden h-4 w-px bg-[#cfd9d2] sm:inline-block" aria-hidden="true"></span>
-            <span class="text-xs font-semibold tracking-[0.01em] text-[#10231b]">
+            <span class="text-[11px] font-semibold tracking-[0.01em] text-[#10231b] sm:text-xs">
                 {{ $meta['instansi'] }}
             </span>
         </div>
@@ -68,13 +68,15 @@
 
                     <div class="mt-7 grid grid-cols-2 gap-x-4 gap-y-4 border-t border-[#e5ebe6] pt-5 sm:grid-cols-3 sm:gap-x-0 sm:divide-x sm:divide-[#e5ebe6]">
                         @foreach ($heroSummary['highlights'] as $index => $sorotan)
-                            <div class="{{ $index === 2 ? 'col-span-2 border-t border-[#e5ebe6] pt-4 sm:col-span-1 sm:border-t-0 sm:pt-0' : '' }} sm:px-5 first:sm:pl-0 last:sm:pr-0">
-                                <span class="block text-xs font-semibold text-[#784f14]">{{ $sorotan['label'] }}</span>
-                                <span class="font-display mt-1 block text-xl font-bold leading-none tracking-[-0.02em] tabular-nums text-[#10231b] sm:text-[1.35rem]">
-                                    {{ $sorotan['angka'] ?? $sorotan['nilai'] }}
-                                </span>
+                            <div class="{{ $index === 2 ? 'col-span-2 flex items-center justify-between gap-3 border-t border-[#e5ebe6] pt-3.5 sm:col-span-1 sm:block sm:border-t-0 sm:pt-0' : '' }} sm:px-5 first:sm:pl-0 last:sm:pr-0">
+                                <div class="{{ $index === 2 ? 'sm:contents' : '' }}">
+                                    <span class="block text-xs font-semibold text-[#784f14]">{{ $sorotan['label'] }}</span>
+                                    <span class="font-display mt-1 block text-xl font-bold leading-none tracking-[-0.02em] tabular-nums text-[#10231b] sm:text-[1.35rem]">
+                                        {{ $sorotan['angka'] ?? $sorotan['nilai'] }}
+                                    </span>
+                                </div>
                                 @if (! empty($sorotan['konteks']))
-                                    <span class="mt-1.5 block text-xs font-medium leading-snug text-[#3f5249]">
+                                    <span class="{{ $index === 2 ? 'text-right sm:mt-1.5 sm:text-left' : 'mt-1.5' }} block text-xs font-medium leading-snug text-[#3f5249]">
                                         {{ $sorotan['konteks'] }}
                                     </span>
                                 @endif

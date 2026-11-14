@@ -13,7 +13,7 @@
                 <span class="font-display block text-base font-bold leading-tight tracking-tight text-[#10231b] sm:text-[17px]">
                     Talas Bogor
                 </span>
-                <span class="block text-[11px] font-medium leading-tight text-[#3f5249]">
+                <span class="block text-xs font-medium leading-tight text-[#3f5249]">
                     Diskominfo Kab. Bogor
                 </span>
             </span>
@@ -46,12 +46,12 @@
             <button type="button"
                     data-open-portal-modal
                     aria-haspopup="dialog"
-                    class="talas-login-btn relative hidden h-9 cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-[#1b4332]/75 bg-white px-3.5 text-[13px] font-semibold tracking-[-0.01em] text-[#1b4332] hover:border-[#1b4332] hover:shadow-[0_2px_10px_-3px_rgba(27,67,50,0.3)] active:scale-[0.97] sm:inline-flex">
+                    class="talas-login-btn relative hidden min-h-[44px] h-11 cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-[#1b4332]/75 bg-white px-4 text-[13px] font-semibold tracking-[-0.01em] text-[#1b4332] hover:border-[#1b4332] hover:shadow-[0_2px_10px_-3px_rgba(27,67,50,0.3)] active:scale-[0.97] sm:inline-flex">
                 <i data-lucide="log-in" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
-                <span>login</span>
+                <span>Login</span>
                 <span class="talas-login-charge gap-1.5 px-3.5" aria-hidden="true">
                     <i data-lucide="log-in" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
-                    <span>login</span>
+                    <span>Login</span>
                 </span>
             </button>
 
@@ -94,10 +94,10 @@
                     aria-haspopup="dialog"
                     class="talas-login-btn relative mt-2 flex min-h-[44px] w-full cursor-pointer items-center justify-center gap-2 rounded-lg border border-[#1b4332] bg-white px-4 text-sm font-semibold text-[#1b4332] active:scale-[0.98]">
                 <i data-lucide="log-in" class="h-4 w-4 shrink-0" aria-hidden="true"></i>
-                <span>login</span>
+                <span>Login</span>
                 <span class="talas-login-charge gap-2 px-4" aria-hidden="true">
                     <i data-lucide="log-in" class="h-4 w-4 shrink-0" aria-hidden="true"></i>
-                    <span>login</span>
+                    <span>Login</span>
                 </span>
             </button>
         </nav>

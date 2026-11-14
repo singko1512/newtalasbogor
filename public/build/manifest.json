@@ -28,7 +28,7 @@
     "src": "node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-vietnamese-wght-normal.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-C0xvANGQ.css",
+    "file": "assets/app-DjjSDNx7.css",
     "name": "app",
     "names": [
       "app.css"
@@ -46,7 +46,7 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-C_-psynX.js",
+    "file": "assets/app-CulJwz8y.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true

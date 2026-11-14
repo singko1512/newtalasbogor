@@ -1,12 +1,11 @@
 <section id="capaian" aria-labelledby="capaian-judul" class="border-b border-[#d6ded7] bg-white py-14 lg:py-18">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div data-scroll-section data-scrollspy-section="capaian">
+        <div data-scroll-section data-scroll-fade-only data-scrollspy-section="capaian">
             <div class="flex flex-col gap-5 border-b border-[#d6ded7] pb-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
                 <div class="max-w-2xl">
-                    <div class="flex items-center gap-2 text-xs font-semibold text-[#784f14]">
-                        <span class="inline-block h-2 w-2 rounded-xs bg-[#d49b35]" aria-hidden="true"></span>
-                        <span>Evaluasi Kinerja Pemerintahan Digital</span>
-                    </div>
+                    <p class="text-xs font-semibold text-[#784f14]">
+                        Evaluasi Kinerja Pemerintahan Digital
+                    </p>
                     <h2 id="capaian-judul" class="font-display mt-2 text-2xl font-bold tracking-[-0.02em] text-[#10231b] sm:text-[1.875rem] sm:leading-[1.15]">
                         Capaian Evaluasi SPBE &amp; Smart City
                     </h2>
@@ -27,37 +26,49 @@
                 </dl>
             </div>
 
-            <div class="mt-8 grid gap-8 lg:grid-cols-12 lg:items-start">
+            <div class="mt-8 grid gap-8 lg:grid-cols-12 lg:items-stretch">
                 {{-- Panel Kiri: Scoreboard, 4 Domain, Rincian 8 Aspek & Rujukan SPBE --}}
-                <article id="spbe" aria-labelledby="spbe-judul" class="min-w-0 overflow-hidden rounded-xl border border-[#d6ded7] bg-white lg:col-span-7">
+                <article id="spbe" aria-labelledby="spbe-judul" class="flex min-w-0 flex-col justify-between overflow-hidden rounded-xl border border-[#d6ded7] bg-white lg:col-span-7">
                     {{-- Header Scoreboard Indeks SPBE --}}
                     <div class="border-b border-[#e5ebe6] bg-[#fafaf7] px-5 py-5 sm:px-6">
-                        <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                        <div class="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
                             <div class="min-w-0">
-                                <h3 id="spbe-judul" class="font-display text-lg font-bold tracking-[-0.015em] text-[#10231b] sm:text-xl">
-                                    Indeks SPBE Kabupaten Bogor
-                                </h3>
+                                <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+                                    <h3 id="spbe-judul" class="font-display text-lg font-bold tracking-[-0.015em] text-[#10231b] sm:text-xl">
+                                        Indeks SPBE Kabupaten Bogor
+                                    </h3>
+                                </div>
                                 <p class="mt-1 text-xs leading-relaxed text-[#3f5249]">
                                     {{ $spbe['referensi'] }}
                                 </p>
+                                @if (! empty($spbe['url']))
+                                    <a href="{{ $spbe['url'] }}"
+                                       target="_blank"
+                                       rel="noopener noreferrer"
+                                       class="-my-1 inline-flex min-h-[44px] items-center gap-1 py-1.5 text-xs font-semibold text-[#1b4332] hover:text-[#0b2017] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
+                                        <span>Rincian {{ $spbe['total_indikator'] }} Indikator SPBE</span>
+                                        <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
+                                        <span class="sr-only"> (buka di tab baru)</span>
+                                    </a>
+                                @endif
                             </div>
 
-                            <div class="flex shrink-0 items-center justify-between gap-4 border-t border-[#e5ebe6] pt-3 sm:justify-end sm:border-t-0 sm:pt-0">
-                                <div class="sm:text-right">
-                                    <span class="block text-xs font-medium text-[#3f5249]">
+                            <div class="flex shrink-0 items-center justify-between gap-4 border-t border-[#e5ebe6] pt-3.5 sm:flex-col sm:items-end sm:border-t-0 sm:pt-0 sm:text-right">
+                                <div>
+                                    <span class="block text-xs font-semibold text-[#3f5249]">
                                         Indeks Tahun {{ $spbe['tahun'] ?? '2025' }}
                                     </span>
-                                    <div class="mt-0.5 flex items-baseline gap-2 sm:justify-end">
-                                        <span class="font-display text-3xl font-bold leading-none tracking-[-0.03em] tabular-nums text-[#10231b] sm:text-[2.25rem]">
+                                    <div class="mt-1 flex items-center gap-2.5 sm:justify-end">
+                                        <span class="font-display text-3xl font-bold leading-none tracking-[-0.03em] tabular-nums text-[#10231b] sm:text-[2.375rem]">
                                             {{ $spbe['indeks_2025'] }}
                                         </span>
-                                        <span class="text-xs font-semibold tabular-nums text-[#166534]">
-                                            {{ $spbe['kenaikan'] }} <span class="font-normal text-[#3f5249]">vs {{ $spbe['indeks_2024'] }} (2024)</span>
+                                        <span class="rounded-sm border-l-2 border-[#d49b35] bg-[#fbf4e4] px-2.5 py-1 text-xs font-bold tracking-[0.04em] text-[#784f14]">
+                                            {{ $spbe['predikat_2025'] }}
                                         </span>
                                     </div>
                                 </div>
-                                <span class="border-l-2 border-[#d49b35] bg-[#fbf4e4] px-3 py-1.5 text-xs font-bold tracking-[0.04em] text-[#784f14]">
-                                    {{ $spbe['predikat_2025'] }}
+                                <span class="text-xs font-semibold tabular-nums text-[#166534]">
+                                    {{ $spbe['kenaikan'] }} <span class="font-normal text-[#3f5249]">vs {{ $spbe['indeks_2024'] }} (2024)</span>
                                 </span>
                             </div>
                         </div>
@@ -68,17 +79,24 @@
                         <div class="border-b border-[#e5ebe6] bg-white">
                             <div class="flex flex-wrap items-baseline justify-between gap-2 px-5 pt-4 pb-2.5 sm:px-6">
                                 <h4 class="text-xs font-bold text-[#10231b]">Rekapitulasi Nilai 4 Domain SPBE ({{ $spbe['tahun'] ?? '2025' }})</h4>
-                                <span class="text-xs text-[#3f5249]">Perbandingan 2024 ke {{ $spbe['tahun'] ?? '2025' }}</span>
+                                <span class="text-xs text-[#3f5249]">Skala 0-5 &middot; perbandingan 2024 ke {{ $spbe['tahun'] ?? '2025' }}</span>
                             </div>
                             <dl class="grid grid-cols-2 border-t border-[#e5ebe6] sm:grid-cols-4">
                                 @foreach ($spbe['domain_ringkas'] as $dom)
-                                    <div class="px-4 py-3 sm:px-5 {{ $loop->index % 2 === 0 ? 'border-r border-[#e5ebe6]' : '' }} {{ $loop->index < 2 ? 'border-b border-[#e5ebe6] sm:border-b-0' : '' }} {{ ! $loop->last ? 'sm:border-r sm:border-[#e5ebe6]' : '' }}">
+                                    @php
+                                        $domNumeric = (float) str_replace(',', '.', (string) ($dom['nilai_2025'] ?? '0'));
+                                        $domBarPct = min(100, max(0, round(($domNumeric / 5.0) * 100, 1)));
+                                    @endphp
+                                    <div class="px-4 py-3.5 sm:px-5 {{ $loop->index % 2 === 0 ? 'border-r border-[#e5ebe6]' : '' }} {{ $loop->index < 2 ? 'border-b border-[#e5ebe6] sm:border-b-0' : '' }} {{ ! $loop->last ? 'sm:border-r sm:border-[#e5ebe6]' : '' }}">
                                         <dt class="text-xs font-semibold leading-snug text-[#10231b]">{{ $dom['domain'] }}</dt>
                                         <dd class="mt-0.5 text-xs tabular-nums text-[#3f5249]">Bobot {{ $dom['bobot'] }}</dd>
-                                        <dd class="mt-2 flex items-baseline justify-between gap-2">
+                                        <dd class="mt-2.5 flex items-baseline justify-between gap-2">
                                             <span class="font-display text-lg font-bold leading-none tabular-nums text-[#10231b]">{{ $dom['nilai_2025'] }}</span>
                                             <span class="text-xs font-semibold tabular-nums {{ str_starts_with($dom['selisih'], '+') ? 'text-[#166534]' : (str_starts_with($dom['selisih'], '-') ? 'text-[#991b1b]' : 'text-[#3f5249]') }}">{{ $dom['selisih'] }}</span>
                                         </dd>
+                                        <div class="mt-2 h-1 w-full overflow-hidden rounded-xs bg-[#e5ebe6]" aria-hidden="true">
+                                            <span class="block h-full rounded-xs bg-[#1b4332]" style="width: {{ $domBarPct }}%"></span>
+                                        </div>
                                     </div>
                                 @endforeach
                             </dl>
@@ -157,12 +175,15 @@
                     {{-- Rujukan & Dokumen Resmi SPBE --}}
                     @if (! empty($spbe['regulasi_tautan']))
                         @php
-                            $regulasiOddTotal = count($spbe['regulasi_tautan']) % 2 === 1;
+                            $spbeDocs = ! empty($spbe['url'])
+                                ? collect($spbe['regulasi_tautan'])->reject(fn ($item) => ($item['url'] ?? '') === $spbe['url'])->values()->all()
+                                : $spbe['regulasi_tautan'];
+                            $regulasiOddTotal = count($spbeDocs) % 2 === 1;
                         @endphp
                         <div class="border-t border-[#e5ebe6] bg-[#fafaf7] px-5 py-4 sm:px-6">
                             <h4 class="text-xs font-bold text-[#10231b]">Rujukan &amp; Dokumen Resmi SPBE</h4>
                             <ul class="mt-2.5 grid grid-cols-1 gap-2 sm:grid-cols-2">
-                                @foreach ($spbe['regulasi_tautan'] as $regLink)
+                                @foreach ($spbeDocs as $regLink)
                                     @php
                                         $isPdfDoc = str_ends_with(strtolower($regLink['url']), '.pdf');
                                     @endphp
@@ -348,13 +369,13 @@
                     </div>
 
                     {{-- Landasan Regulasi Daerah --}}
-                    <div class="mt-6 pt-1">
+                    <div class="mt-5">
                         <h4 class="text-xs font-bold text-[#10231b]">
                             Landasan Regulasi Daerah
                         </h4>
-                        <ul class="mt-2 divide-y divide-[#d6ded7] border-y border-[#d6ded7]">
+                        <ul class="mt-2.5 space-y-2.5">
                             @foreach ($smartCity['regulasi'] as $regulasi)
-                                <li class="pt-3 pb-1">
+                                <li class="rounded-lg border border-[#d6ded7] bg-white p-3.5">
                                     <p class="text-xs leading-relaxed text-[#3f5249]">
                                         {{ is_array($regulasi) ? ($regulasi['judul'] ?? '') : $regulasi }}
                                     </p>
@@ -362,7 +383,7 @@
                                         <a href="{{ $regulasi['url'] }}"
                                            target="_blank"
                                            rel="noopener noreferrer"
-                                           class="inline-flex min-h-[44px] items-center gap-1.5 text-xs font-semibold text-[#1b4332] hover:text-[#0b2017] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
+                                           class="-my-1 inline-flex min-h-[44px] items-center gap-1.5 py-1.5 text-xs font-semibold text-[#1b4332] hover:text-[#0b2017] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
                                             <i data-lucide="file-text" class="h-3.5 w-3.5 shrink-0 text-[#784f14]" aria-hidden="true"></i>
                                             <span>Unduh {{ $regulasi['dokumen_label'] ?? 'Dokumen PDF' }}</span>
                                             <i data-lucide="arrow-up-right" class="h-3 w-3 shrink-0" aria-hidden="true"></i>
@@ -391,20 +412,16 @@
                 ->all();
             $matrixCount = count($matrixMods);
         @endphp
-        <div id="ekosistem" data-scroll-section class="mt-14 border-t border-[#d6ded7] pt-10">
-            <div class="flex flex-col gap-3 border-b border-[#d6ded7] pb-5 lg:flex-row lg:items-end lg:justify-between">
-                <div>
-                    <div class="flex items-center gap-2 text-xs font-semibold text-[#784f14]">
-                        <span class="inline-block h-2 w-2 rounded-xs bg-[#d49b35]" aria-hidden="true"></span>
-                        <span>Ekosistem Resmi TALAS BOGOR</span>
-                    </div>
-                    <h3 class="font-display mt-2 text-xl font-bold tracking-[-0.02em] text-[#10231b] sm:text-2xl">
+        <div id="ekosistem" data-scroll-section data-scroll-fade-only class="mt-14 border-t border-[#d6ded7] pt-10">
+            <div class="border-b border-[#d6ded7] pb-5">
+                <div class="max-w-3xl">
+                    <h3 class="font-display text-xl font-bold tracking-[-0.02em] text-[#10231b] sm:text-2xl">
                         Dashboard Monitoring, SKM &amp; Keamanan Siber
                     </h3>
+                    <p class="mt-1.5 text-sm leading-relaxed text-[#3f5249]">
+                        Kanal sistem resmi terintegrasi Diskominfo Kabupaten Bogor untuk autentikasi operator, survei kepuasan masyarakat, pemantauan aplikasi, standar operasional, dan buletin siber.
+                    </p>
                 </div>
-                <p class="text-xs leading-relaxed text-[#3f5249] lg:text-right">
-                    Kanal sistem resmi terintegrasi Diskominfo Kabupaten Bogor.
-                </p>
             </div>
 
             @if ($loginMod || $skmMod)
@@ -432,13 +449,18 @@
                         @endphp
                         <article class="flex flex-col justify-between rounded-xl border border-[#0b2017] bg-[#10231b] p-5 text-white sm:p-6 {{ $skmMod ? 'lg:col-span-5' : 'lg:col-span-12' }}">
                             <div>
-                                <div class="flex items-start justify-between gap-4 border-b border-white/12 pb-4">
-                                    <div class="flex items-center gap-2 text-xs font-medium text-[#d8e3dc]">
-                                        <i data-lucide="lock" class="h-4 w-4 shrink-0 text-[#f2c66d]" aria-hidden="true"></i>
-                                        <span>Akses &amp; Otorisasi Peran</span>
+                                <div class="flex items-start justify-between gap-4 border-b border-white/12 pb-3.5">
+                                    <div>
+                                        <div class="flex items-center gap-2 text-xs font-medium text-[#d8e3dc]">
+                                            <i data-lucide="lock" class="h-4 w-4 shrink-0 text-[#f2c66d]" aria-hidden="true"></i>
+                                            <span>Akses &amp; Otorisasi Peran</span>
+                                        </div>
+                                        <h4 class="font-display mt-2 text-lg font-bold tracking-[-0.015em] text-white sm:text-xl">
+                                            {{ $loginMod['label'] }}
+                                        </h4>
                                     </div>
                                     @if (! empty($loginMod['metrik']))
-                                        <div class="text-right tabular-nums">
+                                        <div class="shrink-0 text-right tabular-nums">
                                             @if ($loginMetricNum !== '')
                                                 <span class="font-display block text-2xl font-bold leading-none text-[#f2c66d]">{{ $loginMetricNum }}</span>
                                                 <span class="mt-1 block text-xs text-[#d8e3dc]">{{ $loginMetricUnit }}</span>
@@ -449,31 +471,27 @@
                                     @endif
                                 </div>
 
-                                <h4 class="font-display mt-4 text-lg font-bold tracking-[-0.015em] text-white sm:text-xl">
-                                    {{ $loginMod['label'] }}
-                                </h4>
-
                                 @if (count($loginRoles) >= 2)
-                                    <p class="mt-1.5 text-xs leading-relaxed text-[#d8e3dc]">
+                                    <p class="mt-3.5 text-xs leading-relaxed text-[#d8e3dc]">
                                         Sebaran akun pengelola resmi pada sistem pelaporan dan autentikasi:
                                     </p>
-                                    <dl class="mt-3.5 grid grid-cols-2 gap-x-4 gap-y-3 border-y border-white/12 py-3 text-xs"
+                                    <dl class="mt-3 grid grid-cols-2 gap-2.5 text-xs"
                                         aria-label="{{ $loginMod['keterangan'] }}">
                                         @foreach ($loginRoles as $roleItem)
-                                            <div>
+                                            <div class="rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2">
                                                 <dt class="text-[#d8e3dc]">{{ $roleItem['nama'] }}</dt>
                                                 <dd class="font-display mt-0.5 text-base font-bold tabular-nums text-white">{{ $roleItem['jumlah'] }}</dd>
                                             </div>
                                         @endforeach
                                     </dl>
                                 @else
-                                    <p class="mt-2 text-xs leading-relaxed text-[#d8e3dc]">
+                                    <p class="mt-3.5 text-xs leading-relaxed text-[#d8e3dc]">
                                         {{ $loginMod['keterangan'] }}
                                     </p>
                                 @endif
                             </div>
 
-                            <div class="mt-5 flex flex-wrap items-center gap-2.5">
+                            <div class="mt-5 flex flex-wrap items-center gap-2.5 border-t border-white/12 pt-4">
                                 <a href="{{ $loginMod['url'] }}"
                                    target="_blank"
                                    rel="noopener noreferrer"
@@ -527,13 +545,13 @@
                         @endphp
                         <article class="flex flex-col justify-between rounded-xl border border-[#d6ded7] bg-[#f6f5f0] p-5 sm:p-6 {{ $loginMod ? 'lg:col-span-7' : 'lg:col-span-12' }}">
                             <div>
-                                <div class="flex flex-wrap items-start justify-between gap-4 border-b border-[#d6ded7] pb-4">
+                                <div class="flex flex-wrap items-start justify-between gap-4 border-b border-[#d6ded7] pb-3.5">
                                     <div>
                                         <div class="flex items-center gap-2 text-xs font-semibold text-[#784f14]">
                                             <i data-lucide="bar-chart-3" class="h-4 w-4 shrink-0" aria-hidden="true"></i>
                                             <span>Survei Kepuasan Masyarakat</span>
                                         </div>
-                                        <h4 class="font-display mt-1.5 text-lg font-bold tracking-[-0.015em] text-[#10231b] sm:text-xl">
+                                        <h4 class="font-display mt-2 text-lg font-bold tracking-[-0.015em] text-[#10231b] sm:text-xl">
                                             {{ $skmMod['label'] }}
                                         </h4>
                                     </div>
@@ -560,10 +578,15 @@
 
                                 @if (count($skmBreakdown) === 3)
                                     <div class="mt-4">
-                                        <div class="overflow-hidden rounded-full bg-[#dce4de]"
+                                        <div class="flex items-center justify-between text-xs text-[#3f5249]">
+                                            <span class="font-semibold text-[#10231b]">Proporsi Penilaian Publik</span>
+                                            <span>{{ $skmScope !== '' ? $skmScope.' Kabupaten Bogor' : '78 PD Kabupaten Bogor' }}</span>
+                                        </div>
+
+                                        <div class="mt-2.5 overflow-hidden rounded-full bg-[#dce4de]"
                                              role="img"
                                              aria-label="{{ $skmMod['keterangan'] }}">
-                                            <div data-progress-bar="100" class="flex h-2.5 w-full">
+                                            <div data-progress-bar="100" class="flex h-3 w-full">
                                                 <span class="h-full border-r border-[#f6f5f0]"
                                                       style="width: {{ $skmBreakdown['Positif']['pct'] }}%; background-color: #166534"
                                                       title="{{ $skmBreakdown['Positif']['teks'] }}"></span>
@@ -576,16 +599,16 @@
                                             </div>
                                         </div>
 
-                                        <ul class="mt-3.5 grid grid-cols-1 divide-y divide-[#dce4de] border-y border-[#dce4de] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-                                            <li class="flex items-center gap-2 py-2.5 text-xs tabular-nums sm:pr-3">
+                                        <ul class="mt-3.5 grid grid-cols-1 gap-2 sm:grid-cols-3">
+                                            <li class="flex items-center gap-2 rounded-lg border border-[#d6ded7] bg-white px-3 py-2 text-xs tabular-nums">
                                                 <span class="h-2.5 w-2.5 shrink-0 rounded-xs bg-[#166534]" aria-hidden="true"></span>
                                                 <span class="font-semibold text-[#166534]">{{ $skmBreakdown['Positif']['teks'] }}</span>
                                             </li>
-                                            <li class="flex items-center gap-2 py-2.5 text-xs tabular-nums sm:px-3">
+                                            <li class="flex items-center gap-2 rounded-lg border border-[#d6ded7] bg-white px-3 py-2 text-xs tabular-nums">
                                                 <span class="h-2.5 w-2.5 shrink-0 rounded-xs bg-[#d49b35]" aria-hidden="true"></span>
                                                 <span class="font-semibold text-[#784f14]">{{ $skmBreakdown['Netral']['teks'] }}</span>
                                             </li>
-                                            <li class="flex items-center gap-2 py-2.5 text-xs tabular-nums sm:pl-3">
+                                            <li class="flex items-center gap-2 rounded-lg border border-[#d6ded7] bg-white px-3 py-2 text-xs tabular-nums">
                                                 <span class="h-2.5 w-2.5 shrink-0 rounded-xs bg-[#991b1b]" aria-hidden="true"></span>
                                                 <span class="font-semibold text-[#991b1b]">{{ $skmBreakdown['Negatif']['teks'] }}</span>
                                             </li>
@@ -598,9 +621,9 @@
                                 @endif
                             </div>
 
-                            <div class="mt-5 flex flex-wrap items-center justify-between gap-3">
+                            <div class="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-[#d6ded7] pt-4">
                                 <span class="text-xs font-medium text-[#3f5249]">
-                                    {{ $skmScope !== '' ? $skmScope.' Kabupaten Bogor' : 'Survei Layanan Perangkat Daerah' }}
+                                    Evaluasi kepuasan layanan perangkat daerah terintegrasi
                                 </span>
                                 <a href="{{ $skmMod['url'] }}"
                                    target="_blank"
@@ -616,7 +639,7 @@
                 </div>
             @endif
 
-            {{-- Matriks Kanal Terintegrasi (4 Modul dengan Pembatas Hairline) --}}
+            {{-- Matriks Kanal Terintegrasi (4 Modul dengan Pembatas Hairline & Ritme Aksi Sejajar) --}}
             @if ($matrixCount > 0)
                 <div class="mt-5 overflow-hidden rounded-xl border border-[#d6ded7] bg-white">
                     <div class="grid grid-cols-1 sm:grid-cols-2 {{ $matrixCount === 3 ? 'lg:grid-cols-3' : ($matrixCount >= 4 ? 'lg:grid-cols-4' : '') }}">
@@ -624,11 +647,11 @@
                             @php
                                 $kode = $mod['kode'] ?? '';
                                 $modMeta = match ($kode) {
-                                    'dashboard' => ['icon' => 'server', 'kategori' => 'Monitoring Aplikasi', 'cta' => 'Buka Dashboard Layanan'],
-                                    'scoreweb-kec' => ['icon' => 'check-circle-2', 'kategori' => 'Evaluasi Website', 'cta' => 'Scoreweb Kecamatan (40)'],
-                                    'sop' => ['icon' => 'file-text', 'kategori' => 'Standar Operasional', 'cta' => 'Buka Arsip SOP (PDF)'],
-                                    'chikiber' => ['icon' => 'shield-check', 'kategori' => 'Keamanan Siber', 'cta' => 'Baca Buletin Chikiber'],
-                                    default => ['icon' => 'globe', 'kategori' => 'Layanan Resmi', 'cta' => 'Akses Modul Resmi'],
+                                    'dashboard' => ['icon' => 'server', 'kategori' => 'Monitoring Aplikasi', 'cta' => 'Buka Dashboard Layanan', 'sub' => null],
+                                    'scoreweb-kec' => ['icon' => 'check-circle-2', 'kategori' => 'Evaluasi Website', 'cta' => 'Scoreweb Kecamatan (40)', 'sub' => null],
+                                    'sop' => ['icon' => 'file-text', 'kategori' => 'Standar Operasional', 'cta' => 'Buka Arsip SOP (PDF)', 'sub' => 'Kepkadis 000.8/241/KPTS/II/2024'],
+                                    'chikiber' => ['icon' => 'shield-check', 'kategori' => 'Keamanan Siber', 'cta' => 'Baca Buletin Chikiber', 'sub' => 'Edisi Januari s.d. Desember'],
+                                    default => ['icon' => 'globe', 'kategori' => 'Layanan Resmi', 'cta' => 'Akses Modul Resmi', 'sub' => null],
                                 };
                                 $hasBottomOnSm = $matrixCount % 2 === 0 ? $loop->index < $matrixCount - 2 : $loop->index < $matrixCount - 1;
                             @endphp
@@ -653,11 +676,11 @@
                                     </p>
                                 </div>
 
-                                <div class="mt-4 flex flex-col items-start border-t border-[#e5ebe6] pt-2">
+                                <div class="mt-5 flex flex-col items-start gap-0.5 border-t border-[#e5ebe6] pt-2.5">
                                     <a href="{{ $mod['url'] }}"
                                        target="_blank"
                                        rel="noopener noreferrer"
-                                       class="inline-flex min-h-[44px] items-center gap-1.5 text-xs font-semibold text-[#1b4332] hover:text-[#0b2017] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
+                                       class="-my-0.5 inline-flex min-h-[44px] items-center gap-1.5 py-1.5 text-xs font-semibold text-[#1b4332] hover:text-[#0b2017] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
                                         <span>{{ $modMeta['cta'] }}</span>
                                         <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
                                         <span class="sr-only"> (buka di tab baru)</span>
@@ -667,11 +690,15 @@
                                         <a href="{{ $mod['tautan_sekunder']['url'] }}"
                                            target="_blank"
                                            rel="noopener noreferrer"
-                                           class="inline-flex min-h-[44px] items-center gap-1.5 text-xs font-semibold text-[#784f14] hover:text-[#10231b] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
+                                           class="-my-0.5 inline-flex min-h-[44px] items-center gap-1.5 py-1.5 text-xs font-semibold text-[#784f14] hover:text-[#10231b] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
                                             <span>{{ $mod['tautan_sekunder']['label'] }}</span>
                                             <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
                                             <span class="sr-only"> (buka di tab baru)</span>
                                         </a>
+                                    @elseif (! empty($modMeta['sub']))
+                                        <p class="-my-0.5 flex min-h-[44px] items-center py-1.5 text-xs font-medium text-[#3f5249]">
+                                            {{ $modMeta['sub'] }}
+                                        </p>
                                     @endif
                                 </div>
                             </article>

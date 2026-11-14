@@ -29,11 +29,10 @@
         <div class="grid gap-8 lg:grid-cols-12 lg:gap-10">
             {{-- Panel Kiri Sticky: Indeks Kategori & Desk Layanan --}}
             <div data-scroll-section class="lg:col-span-4 lg:sticky lg:top-24 lg:self-start">
-                <h2 id="layanan-judul" class="text-2xl font-bold tracking-tight text-[#10231b] sm:text-3xl">
+                <h2 id="layanan-judul" class="font-display text-2xl font-bold tracking-[-0.02em] text-[#10231b] sm:text-[1.875rem] sm:leading-[1.15]">
                     Layanan TALAS BOGOR
                 </h2>
-                <div aria-hidden="true" class="mt-2.5 h-1 w-12 rounded-full bg-[#d49b35]"></div>
-                <p class="mt-3.5 text-sm leading-relaxed text-[#3f5249]">
+                <p class="mt-2.5 text-sm leading-relaxed text-[#3f5249]">
                     9 layanan digital resmi Diskominfo Kabupaten Bogor untuk permohonan domain, hosting, email dinas, otorisasi operator, pengujian keamanan, dan pemulihan gangguan website.
                 </p>
 
@@ -69,15 +68,17 @@
                        class="mt-5 overflow-hidden rounded-xl border border-[#d6ded7] bg-white shadow-2xs">
                     <div class="bg-[#f6f5f0]/80 p-4 sm:p-5">
                         <div class="flex items-start gap-3.5">
-                            <img src="{{ asset('images/icons/layanan/sop-document.svg') }}"
-                                 alt=""
-                                 width="36"
-                                 height="36"
-                                 class="h-9 w-9 shrink-0 object-contain"
-                                 aria-hidden="true">
+                            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#d6ded7] bg-white p-1.5 shadow-2xs" aria-hidden="true">
+                                <img src="{{ asset('images/icons/layanan/sop-document.svg') }}"
+                                     alt=""
+                                     width="32"
+                                     height="32"
+                                     class="h-full w-full object-contain"
+                                     aria-hidden="true">
+                            </span>
                             <div class="min-w-0">
-                                <p class="font-mono text-[11px] font-bold tracking-wide text-[#926018] uppercase">
-                                    Panduan Prosedur
+                                <p class="text-xs font-semibold text-[#784f14]">
+                                    Panduan Prosedur &amp; SOP
                                 </p>
                                 <h3 class="mt-0.5 text-sm font-bold text-[#10231b]">
                                     Arsip {{ count($sopList) }} SOP &amp; Portal Tiket
@@ -132,15 +133,17 @@
                                     <div class="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
                                         <div class="min-w-0 flex-1">
                                             <div class="flex items-start gap-3.5">
-                                                <img src="{{ asset($item['icon_path']) }}"
-                                                     alt=""
-                                                     width="40"
-                                                     height="40"
-                                                     class="mt-0.5 h-10 w-10 shrink-0 object-contain"
-                                                     aria-hidden="true">
+                                                <span class="mt-0.5 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#d6ded7] bg-[#f8faf8] p-2" aria-hidden="true">
+                                                    <img src="{{ asset($item['icon_path']) }}"
+                                                         alt=""
+                                                         width="36"
+                                                         height="36"
+                                                         class="h-full w-full object-contain"
+                                                         aria-hidden="true">
+                                                </span>
                                                 <div class="min-w-0 flex-1">
-                                                    <p class="font-mono text-xs font-bold tracking-tight text-[#926018]">
-                                                        {{ $itemNumber }} &middot; PENANGANAN GANGGUAN ({{ $item['kode_sop'] }})
+                                                    <p class="font-mono text-xs font-bold tracking-tight text-[#784f14]">
+                                                        {{ $itemNumber }} &middot; Penanganan Gangguan ({{ $item['kode_sop'] }})
                                                     </p>
                                                     <h3 class="mt-0.5 text-lg font-bold leading-snug text-[#10231b] sm:text-xl">
                                                         {{ $item['nama'] }}
@@ -194,19 +197,21 @@
                                      class="{{ $spansTwoCols ? 'md:col-span-2 ' : '' }}group flex cursor-pointer flex-col justify-between overflow-hidden rounded-xl border border-[#d6ded7] bg-white shadow-2xs transition-all duration-200 hover:border-[#1b4332]/65 hover:shadow-[0_12px_26px_-18px_rgba(16,35,27,0.18)]">
                                 <div class="p-5">
                                     <div class="flex items-start gap-3.5">
-                                        <img src="{{ asset($item['icon_path']) }}"
-                                             alt=""
-                                             width="40"
-                                             height="40"
-                                             class="mt-0.5 h-10 w-10 shrink-0 object-contain"
-                                             aria-hidden="true">
+                                        <span class="mt-0.5 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#e5ebe6] bg-[#f8faf8] p-2 transition-colors group-hover:border-[#cfd9d2] group-hover:bg-[#edf2ed]/75" aria-hidden="true">
+                                            <img src="{{ asset($item['icon_path']) }}"
+                                                 alt=""
+                                                 width="36"
+                                                 height="36"
+                                                 class="h-full w-full object-contain"
+                                                 aria-hidden="true">
+                                        </span>
 
                                         <div class="min-w-0 flex-1">
-                                            <div class="flex items-center justify-between gap-2">
-                                                <span class="text-xs font-bold text-[#926018]">
+                                            <div class="flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
+                                                <span class="min-w-0 text-xs font-bold text-[#784f14]">
                                                     <span class="font-mono tabular-nums">{{ $itemNumber }}</span> &middot; {{ $item['kategori'] }}
                                                 </span>
-                                                <span class="shrink-0 font-mono text-[11px] font-bold tracking-tight tabular-nums text-[#1b4332]">
+                                                <span class="shrink-0 rounded-md border border-[#e5ebe6] bg-[#f8faf8] px-2 py-0.5 font-mono text-[11px] font-bold tracking-tight tabular-nums text-[#1b4332]">
                                                     {{ $item['kode_sop'] }}
                                                 </span>
                                             </div>

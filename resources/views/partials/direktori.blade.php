@@ -2,27 +2,25 @@
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
          data-directory-root
          data-scroll-section
+         data-scroll-fade-only
          data-active-tab="{{ $activeTab }}"
          data-web-category="{{ $activeWebCategory }}"
          data-per-page="{{ $perPage }}">
-        <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div class="max-w-2xl">
-                <h2 id="direktori-judul" class="text-2xl font-bold tracking-tight text-[#10231b] sm:text-3xl">
-                    Direktori Aplikasi, Website &amp; Desa.id
-                </h2>
-                <div aria-hidden="true" class="mt-2.5 h-1 w-12 rounded-full bg-[#d49b35]"></div>
-                <p class="mt-3.5 text-sm leading-relaxed text-[#3f5249]">
-                    Penelusuran lengkap {{ $direktoriSummary['app_rows'] }} perangkat daerah ({{ $direktoriSummary['app_items'] }} aplikasi), {{ $direktoriSummary['web_items'] }} situs resmi bogorkab.go.id, dan {{ $direktoriSummary['desa_items'] }} website desa.id sesuai basis data TALAS BOGOR.
-                </p>
-            </div>
-
-            <div class="shrink-0 rounded-xl border border-[#cfd9d2] bg-white px-4 py-3 shadow-2xs">
-                <p class="font-mono text-[11px] font-bold tracking-wide text-[#926018] uppercase">
-                    Rekapitulasi Basis Data
-                </p>
-                <p class="mt-0.5 text-xs font-medium text-[#3f5249]">
-                    Total teregistrasi: <strong class="font-bold tabular-nums text-[#10231b]">{{ number_format($direktoriSummary['total_entries'], 0, ',', '.') }}</strong> entri ({{ number_format($direktoriSummary['total_rows'], 0, ',', '.') }} baris tabel)
-                </p>
+        <div class="max-w-3xl">
+            <h2 id="direktori-judul" class="font-display text-2xl font-bold tracking-[-0.02em] text-[#10231b] sm:text-[1.875rem] sm:leading-[1.15]">
+                Direktori Aplikasi, Website &amp; Desa.id
+            </h2>
+            <p class="mt-2.5 text-sm leading-relaxed text-[#3f5249]">
+                Penelusuran lengkap {{ $direktoriSummary['app_rows'] }} perangkat daerah ({{ $direktoriSummary['app_items'] }} aplikasi), {{ $direktoriSummary['web_items'] }} situs resmi bogorkab.go.id, dan {{ $direktoriSummary['desa_items'] }} website desa.id sesuai basis data TALAS BOGOR.
+            </p>
+            <div class="mt-4 inline-flex flex-wrap items-center gap-x-3 gap-y-1.5 rounded-lg border border-[#d6ded7] bg-white px-3.5 py-2 text-xs text-[#3f5249] shadow-2xs">
+                <span class="font-semibold text-[#784f14]">Rekapitulasi Basis Data</span>
+                <span class="text-[#cfd9d2]" aria-hidden="true">/</span>
+                <span>
+                    Total teregistrasi: <strong class="font-display font-bold tabular-nums text-[#10231b]">{{ number_format($direktoriSummary['total_entries'], 0, ',', '.') }}</strong> entri ({{ number_format($direktoriSummary['total_rows'], 0, ',', '.') }} baris tabel)
+                </span>
+                <span class="hidden text-[#cfd9d2] sm:inline" aria-hidden="true">/</span>
+                <span class="text-[#3f5249]">Data {{ $meta['tanggal_observasi'] }}</span>
             </div>
         </div>
 
@@ -47,7 +45,7 @@
                                aria-controls="panel-{{ $tabKey }}"
                                tabindex="{{ $isSelected ? '0' : '-1' }}"
                                data-dir-tab="{{ $tabKey }}"
-                               class="talas-transition relative z-10 inline-flex min-h-[42px] w-full items-center justify-between gap-2.5 whitespace-nowrap rounded-lg border px-3.5 py-2 text-sm font-bold sm:w-auto sm:justify-start {{ $isSelected ? 'border-[#1b4332] bg-[#1b4332] text-white' : 'border-transparent bg-transparent text-[#3f5249] hover:text-[#10231b]' }}">
+                               class="talas-transition relative z-10 inline-flex min-h-[44px] w-full items-center justify-between gap-2.5 whitespace-nowrap rounded-lg border px-3.5 py-2 text-sm font-bold sm:w-auto sm:justify-start {{ $isSelected ? 'border-[#1b4332] bg-[#1b4332] text-white' : 'border-transparent bg-transparent text-[#3f5249] hover:text-[#10231b]' }}">
                                 <span>{{ $tabData['judul'] }}</span>
                                 <span data-dir-tab-badge
                                       class="rounded-md px-2 py-0.5 font-mono text-xs font-bold tabular-nums {{ $isSelected ? 'bg-white/20 text-white' : 'bg-white/90 text-[#10231b]' }}">
@@ -72,15 +70,15 @@
                                    maxlength="80"
                                    placeholder="Cari OPD, domain, atau desa..."
                                    data-dir-search
-                                   class="min-h-[42px] w-full rounded-lg border border-[#cfd9d2] bg-white py-2 pr-3.5 pl-9.5 text-sm text-[#10231b] shadow-2xs transition-colors placeholder:text-[#3f5249]/75 focus:border-[#1b4332]">
+                                   class="min-h-[44px] w-full rounded-lg border border-[#cfd9d2] bg-white py-2 pr-3.5 pl-9.5 text-sm text-[#10231b] shadow-2xs transition-colors placeholder:text-[#3f5249]/75 focus:border-[#1b4332]">
                         </div>
                         <button type="submit"
-                                class="talas-transition inline-flex min-h-[42px] shrink-0 cursor-pointer items-center justify-center rounded-lg bg-[#1b4332] px-4 py-2 text-sm font-bold text-white hover:bg-[#143325] active:scale-[0.98]">
+                                class="talas-transition inline-flex min-h-[44px] shrink-0 cursor-pointer items-center justify-center rounded-lg bg-[#1b4332] px-4 py-2 text-sm font-bold text-white hover:bg-[#143325] active:scale-[0.98]">
                             Cari
                         </button>
                         <a href="{{ route('beranda', ['tab' => $activeTab]) }}#direktori"
                            data-dir-reset
-                           class="{{ $hasActiveFilter ? 'inline-flex' : 'hidden' }} talas-transition min-h-[42px] shrink-0 items-center justify-center rounded-lg border border-[#cfd9d2] bg-white px-3.5 py-2 text-sm font-semibold text-[#3f5249] hover:border-[#1b4332] hover:text-[#10231b]">
+                           class="{{ $hasActiveFilter ? 'inline-flex' : 'hidden' }} talas-transition min-h-[44px] shrink-0 items-center justify-center rounded-lg border border-[#cfd9d2] bg-white px-3.5 py-2 text-sm font-semibold text-[#3f5249] hover:border-[#1b4332] hover:text-[#10231b]">
                             Reset
                         </a>
                     </form>
@@ -164,7 +162,7 @@
                                         <a href="{{ $meta['dashboard_layanan_url'] }}"
                                            target="_blank"
                                            rel="noopener noreferrer"
-                                           class="talas-transition inline-flex min-h-[40px] items-center gap-1.5 rounded-lg border border-[#c5d3c9] bg-white px-3.5 py-2 text-xs font-bold text-[#1b4332] shadow-2xs hover:border-[#1b4332] hover:bg-[#1b4332] hover:text-white">
+                                           class="talas-transition inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-[#c5d3c9] bg-white px-3.5 py-2 text-xs font-bold text-[#1b4332] shadow-2xs hover:border-[#1b4332] hover:bg-[#1b4332] hover:text-white">
                                             <i data-lucide="server" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
                                             <span>Sebaran Server &amp; Layanan</span>
                                             <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
@@ -172,7 +170,7 @@
                                         <a href="{{ $meta['assesment_url'] }}"
                                            target="_blank"
                                            rel="noopener noreferrer"
-                                           class="talas-transition inline-flex min-h-[40px] items-center gap-1.5 rounded-lg border border-[#c5d3c9] bg-white px-3.5 py-2 text-xs font-bold text-[#1b4332] shadow-2xs hover:border-[#1b4332] hover:bg-[#1b4332] hover:text-white">
+                                           class="talas-transition inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-[#c5d3c9] bg-white px-3.5 py-2 text-xs font-bold text-[#1b4332] shadow-2xs hover:border-[#1b4332] hover:bg-[#1b4332] hover:text-white">
                                             <i data-lucide="clipboard-check" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
                                             <span>Asesmen 57 Layanan</span>
                                             <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
@@ -184,7 +182,7 @@
                                             <a href="{{ $scoreLink['url'] }}"
                                                target="_blank"
                                                rel="noopener noreferrer"
-                                               class="talas-transition inline-flex min-h-[40px] items-center gap-1.5 rounded-lg border border-[#c5d3c9] bg-white px-3.5 py-2 text-xs font-bold text-[#1b4332] shadow-2xs hover:border-[#1b4332] hover:bg-[#1b4332] hover:text-white">
+                                               class="talas-transition inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-[#c5d3c9] bg-white px-3.5 py-2 text-xs font-bold text-[#1b4332] shadow-2xs hover:border-[#1b4332] hover:bg-[#1b4332] hover:text-white">
                                                 <i data-lucide="bar-chart-3" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
                                                 <span>{{ $scoreLink['label'] }}</span>
                                                 <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
@@ -211,7 +209,7 @@
                                         <a href="{{ route('beranda', array_filter(['tab' => 'website', 'web_cat' => $catCode !== 'SEMUA' ? $catCode : null, 'q' => $searchQuery !== '' ? $searchQuery : null])) }}#direktori"
                                            data-web-cat="{{ $catCode }}"
                                            aria-pressed="{{ $isCatActive ? 'true' : 'false' }}"
-                                           class="talas-transition relative z-10 inline-flex min-h-[38px] items-center rounded-lg border px-3 py-1.5 text-xs font-bold {{ $isCatActive ? 'border-[#1b4332] bg-[#1b4332] text-white' : 'border-transparent bg-transparent text-[#3f5249] hover:text-[#10231b]' }}">
+                                           class="talas-transition relative z-10 inline-flex min-h-[44px] items-center rounded-lg border px-3 py-1.5 text-xs font-bold {{ $isCatActive ? 'border-[#1b4332] bg-[#1b4332] text-white' : 'border-transparent bg-transparent text-[#3f5249] hover:text-[#10231b]' }}">
                                             {{ $catLabel }}
                                         </a>
                                     @endforeach
@@ -292,10 +290,10 @@
                                                     <td class="px-5 py-3.5 font-mono text-xs font-semibold tabular-nums text-[#3f5249]">{{ $row['no'] }}</td>
                                                     <td class="px-5 py-3.5 font-bold text-[#10231b]">{{ $row['instansi'] }}</td>
                                                     <td class="bg-[#f4f8f5] px-5 py-3.5 text-right font-mono text-sm font-bold tabular-nums text-[#1b4332]">{{ $row['jumlah'] }}</td>
-                                                    <td class="px-5 py-3.5 text-right font-mono text-xs tabular-nums {{ (int) $row['prioritas'] > 0 ? 'font-bold text-[#10231b]' : 'text-[#3f5249]/55' }}">{{ $row['prioritas'] }}</td>
-                                                    <td class="px-5 py-3.5 text-right font-mono text-xs tabular-nums {{ (int) $row['tematik'] > 0 ? 'font-bold text-[#10231b]' : 'text-[#3f5249]/55' }}">{{ $row['tematik'] }}</td>
-                                                    <td class="px-5 py-3.5 text-right font-mono text-xs tabular-nums {{ (int) $row['instansional'] > 0 ? 'font-bold text-[#10231b]' : 'text-[#3f5249]/55' }}">{{ $row['instansional'] }}</td>
-                                                    <td class="px-5 py-3.5 text-right font-mono text-xs tabular-nums {{ (int) $row['lainnya'] > 0 ? 'font-bold text-[#10231b]' : 'text-[#3f5249]/55' }}">{{ $row['lainnya'] }}</td>
+                                                    <td class="px-5 py-3.5 text-right font-mono text-xs tabular-nums {{ (int) $row['prioritas'] > 0 ? 'font-bold text-[#10231b]' : 'text-[#54665d]' }}">{{ $row['prioritas'] }}</td>
+                                                    <td class="px-5 py-3.5 text-right font-mono text-xs tabular-nums {{ (int) $row['tematik'] > 0 ? 'font-bold text-[#10231b]' : 'text-[#54665d]' }}">{{ $row['tematik'] }}</td>
+                                                    <td class="px-5 py-3.5 text-right font-mono text-xs tabular-nums {{ (int) $row['instansional'] > 0 ? 'font-bold text-[#10231b]' : 'text-[#54665d]' }}">{{ $row['instansional'] }}</td>
+                                                    <td class="px-5 py-3.5 text-right font-mono text-xs tabular-nums {{ (int) $row['lainnya'] > 0 ? 'font-bold text-[#10231b]' : 'text-[#54665d]' }}">{{ $row['lainnya'] }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -394,19 +392,19 @@
                                     <a href="{{ route('beranda', array_filter(['tab' => $tabKey, 'q' => $searchQuery !== '' ? $searchQuery : null, 'web_cat' => $tabKey === 'website' && $activeWebCategory !== 'SEMUA' ? $activeWebCategory : null, 'page' => $prevPage])) }}#direktori"
                                        data-dir-page-btn="prev"
                                        aria-disabled="{{ $currentPage <= 1 ? 'true' : 'false' }}"
-                                       class="talas-transition inline-flex min-h-[40px] items-center gap-1 rounded-lg border border-[#cfd9d2] bg-white px-3 font-bold text-[#10231b] shadow-2xs hover:border-[#1b4332] {{ $currentPage <= 1 ? 'pointer-events-none opacity-45' : '' }}">
+                                       class="talas-transition inline-flex min-h-[44px] items-center gap-1 rounded-lg border border-[#cfd9d2] bg-white px-3 font-bold text-[#10231b] shadow-2xs hover:border-[#1b4332] {{ $currentPage <= 1 ? 'pointer-events-none opacity-45' : '' }}">
                                         <i data-lucide="chevron-left" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
                                         <span>Sebelumnya</span>
                                     </a>
 
-                                    <span data-dir-page-info="{{ $tabKey }}" class="rounded-md border border-[#dce4de] bg-white px-2.5 py-1.5 font-mono font-bold tabular-nums text-[#10231b]">
+                                    <span data-dir-page-info="{{ $tabKey }}" class="inline-flex min-h-[44px] items-center rounded-md border border-[#dce4de] bg-white px-3 font-mono font-bold tabular-nums text-[#10231b]">
                                         Hal. {{ $currentPage }} / {{ $totalPages }}
                                     </span>
 
                                     <a href="{{ route('beranda', array_filter(['tab' => $tabKey, 'q' => $searchQuery !== '' ? $searchQuery : null, 'web_cat' => $tabKey === 'website' && $activeWebCategory !== 'SEMUA' ? $activeWebCategory : null, 'page' => $nextPage])) }}#direktori"
                                        data-dir-page-btn="next"
                                        aria-disabled="{{ $currentPage >= $totalPages ? 'true' : 'false' }}"
-                                       class="talas-transition inline-flex min-h-[40px] items-center gap-1 rounded-lg border border-[#cfd9d2] bg-white px-3 font-bold text-[#10231b] shadow-2xs hover:border-[#1b4332] {{ $currentPage >= $totalPages ? 'pointer-events-none opacity-45' : '' }}">
+                                       class="talas-transition inline-flex min-h-[44px] items-center gap-1 rounded-lg border border-[#cfd9d2] bg-white px-3 font-bold text-[#10231b] shadow-2xs hover:border-[#1b4332] {{ $currentPage >= $totalPages ? 'pointer-events-none opacity-45' : '' }}">
                                         <span>Berikutnya</span>
                                         <i data-lucide="chevron-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
                                     </a>
@@ -415,7 +413,7 @@
                                 <a href="{{ $meta['dashboard_layanan_url'] }}"
                                    target="_blank"
                                    rel="noopener noreferrer"
-                                   class="inline-flex min-h-[40px] items-center gap-1 px-1.5 font-bold text-[#1b4332] hover:underline sm:ml-1">
+                                   class="inline-flex min-h-[44px] items-center gap-1 px-1.5 font-bold text-[#1b4332] hover:underline sm:ml-1">
                                     <span>Dashboard Layanan</span>
                                     <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
                                 </a>

@@ -10,6 +10,7 @@ import {
     ChevronLeft,
     ChevronRight,
     ClipboardCheck,
+    Clock,
     FileText,
     Globe,
     House,
@@ -43,6 +44,7 @@ const LUCIDE_ICONS = {
     ChevronLeft,
     ChevronRight,
     ClipboardCheck,
+    Clock,
     FileText,
     Globe,
     House,
@@ -1141,7 +1143,7 @@ function renderDesktopRow(tabKey, row) {
     tr.setAttribute('data-dir-row', '');
 
     if (tabKey === 'aplikasi') {
-        const metricClass = (val) => `px-5 py-3.5 text-right font-mono text-xs tabular-nums ${Number(val) > 0 ? 'font-bold text-[#10231b]' : 'text-[#3f5249]/55'}`;
+        const metricClass = (val) => `px-5 py-3.5 text-right font-mono text-xs tabular-nums ${Number(val) > 0 ? 'font-bold text-[#10231b]' : 'text-[#54665d]'}`;
         tr.append(
             createNode('td', 'px-5 py-3.5 font-mono text-xs font-semibold tabular-nums text-[#3f5249]', row.no),
             createNode('td', 'px-5 py-3.5 font-bold text-[#10231b]', row.instansi),
@@ -2036,7 +2038,30 @@ function initModals(closeMobileNav) {
     });
 
     document.querySelectorAll('[data-open-portal-modal]').forEach((btn) => {
-        btn.addEventListener('click', () => openModal(portalModal, btn));
+        btn.addEventListener('click', () => {
+            const targetRole = btn.getAttribute('data-portal-role-target');
+            if (targetRole) {
+                portalModal.dispatchEvent(new CustomEvent('talas:select-portal-role', {
+                    detail: { roleKey: targetRole },
+                }));
+            }
+            openModal(portalModal, btn);
+        });
+    });
+
+    document.querySelectorAll('[data-portal-role-card]').forEach((card) => {
+        card.addEventListener('click', (event) => {
+            if (event.target instanceof Element && event.target.closest('button, a')) {
+                return;
+            }
+            if (window.getSelection && window.getSelection().toString().trim().length > 0) {
+                return;
+            }
+            const modalBtn = card.querySelector('[data-open-portal-modal]');
+            if (modalBtn instanceof HTMLElement) {
+                modalBtn.click();
+            }
+        });
     });
 
     document.querySelectorAll('[data-close-modal], [data-modal-backdrop]').forEach((node) => {
@@ -2085,11 +2110,11 @@ function initPortalRoleTabs() {
     }
 
     roleTabs.forEach((tab) => {
-        tab.classList.remove('bg-[#edf2ed]', 'bg-white', 'shadow-[inset_3px_0_0_#926018]');
+        tab.classList.remove('bg-[#edf2ed]', 'bg-white', 'shadow-[inset_3px_0_0_#784f14]');
     });
 
     const roleGlide = createGlideIndicator(roleTabsContainer, {
-        pillClass: 'bg-[#edf2ed] shadow-[inset_3px_0_0_#926018]',
+        pillClass: 'bg-[#edf2ed] shadow-[inset_3px_0_0_#784f14]',
     });
 
     const tabOrder = roleTabs.map((tab) => tab.getAttribute('data-portal-role'));
@@ -2268,6 +2293,13 @@ function initPortalRoleTabs() {
             finalizeStage(roleKey);
         });
     };
+
+    portalModal.addEventListener('talas:select-portal-role', (event) => {
+        const targetRole = event?.detail?.roleKey;
+        if (typeof targetRole === 'string' && targetRole.length > 0) {
+            selectRole(targetRole);
+        }
+    });
 
     portalModal.addEventListener('talas:modal-closed', () => {
         transitionToken += 1;
