@@ -1,5 +1,5 @@
 <header data-header-surface
-        class="talas-header talas-transition sticky top-0 z-40 border-b border-[#d6ded7] bg-white/98 text-[#10231b] shadow-[0_1px_2px_rgba(16,35,27,0.05)]">
+        class="talas-header sticky top-0 z-40 border-b border-[#d6ded7] text-[#10231b] shadow-[0_1px_2px_rgba(16,35,27,0.05)]">
     <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2.5 sm:px-6 lg:px-8">
         <a href="#konten-utama"
            class="group flex min-h-[44px] min-w-0 items-center gap-3 rounded-lg pr-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">

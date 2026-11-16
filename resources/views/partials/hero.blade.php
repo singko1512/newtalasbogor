@@ -1,22 +1,22 @@
 <section id="hero"
-         data-scroll-section
-         data-hero-container
+         data-hero-section
          aria-labelledby="hero-judul"
-         class="relative flex flex-col justify-center overflow-hidden border-b border-[#0b2017] bg-[#0b2017] py-8 sm:py-11 lg:min-h-[calc(100dvh-4.25rem)] lg:py-14">
+         class="sticky top-[4rem] z-0 flex flex-col justify-center overflow-hidden bg-[#0b2017] py-8 sm:py-11 lg:min-h-[calc(100dvh-4rem)] lg:py-14">
     {{-- Foto Latar Arsitektural Penuh Hero --}}
-    <img src="{{ asset('images/hero-bogor.webp') }}"
+    <img data-hero-bg
+         src="{{ asset('images/hero-bogor.webp') }}"
          alt=""
          aria-hidden="true"
          fetchpriority="high"
-         data-parallax-hero-bg
-         class="pointer-events-none absolute inset-x-0 -top-[15%] h-[135%] w-full object-cover object-center opacity-95 will-change-transform">
-    <div aria-hidden="true" data-parallax-hero-scrim class="talas-hero-scrim pointer-events-none absolute inset-0"></div>
+         class="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-95 will-change-transform">
+    <div aria-hidden="true" class="talas-hero-scrim pointer-events-none absolute inset-0"></div>
+    <div data-hero-curtain-veil aria-hidden="true" class="pointer-events-none absolute inset-0 z-[5] bg-[#07150f] opacity-0"></div>
 
-    <div data-parallax-hero-content class="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 will-change-transform">
+    <div data-hero-stage class="relative z-10 mx-auto w-full max-w-7xl px-4 will-change-[transform,opacity] sm:px-6 lg:px-8">
         <div class="grid items-center gap-8 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:gap-10 xl:gap-12">
             {{-- Kolom Kiri: Identitas Instansi, Judul Utama, Ringkasan, & Aksi Utama --}}
             <div class="min-w-0 text-left text-white">
-                <div data-hero-stagger class="flex flex-wrap items-center gap-x-3.5 gap-y-2">
+                <div data-hero-stagger class="inline-flex flex-wrap items-center gap-x-3.5 gap-y-2">
                     <img src="{{ asset('images/logo-diskominfo-bogorkab.png') }}"
                          alt="Diskominfo Kabupaten Bogor"
                          width="160"
@@ -45,12 +45,11 @@
 
                 <div data-hero-stagger class="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                     <a href="#layanan"
-                       class="talas-transition group inline-flex min-h-[46px] w-full items-center justify-center gap-2 rounded-lg bg-[#d49b35] px-5 py-2.5 text-sm font-bold text-[#0b2017] shadow-xs hover:bg-[#e1aa44] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f2c66d] active:scale-[0.98] sm:w-auto sm:whitespace-nowrap">
-                        <span>Lihat Katalog {{ $heroSummary['katalog_count'] }} Layanan</span>
-                        <i data-lucide="chevron-right" class="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true"></i>
+                       class="talas-transition inline-flex min-h-[46px] w-full items-center justify-center rounded-lg border border-[#e8bc66]/55 bg-[#d49b35] px-5 py-2.5 text-sm font-bold text-[#0b2017] shadow-[0_8px_22px_-6px_rgba(212,155,53,0.42)] hover:-translate-y-px hover:bg-[#e1aa44] hover:shadow-[0_12px_28px_-6px_rgba(212,155,53,0.55)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f2c66d] active:translate-y-0 active:scale-[0.98] sm:w-auto sm:whitespace-nowrap">
+                        Lihat Katalog {{ $heroSummary['katalog_count'] }} Layanan
                     </a>
                     <a href="#direktori"
-                       class="talas-transition inline-flex min-h-[46px] w-full items-center justify-center gap-2 rounded-lg border border-white/30 bg-[#0b2017]/80 px-5 py-2.5 text-sm font-semibold text-white hover:border-white/55 hover:bg-[#122e21]/95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[0.98] sm:w-auto sm:whitespace-nowrap">
+                       class="talas-transition inline-flex min-h-[46px] w-full items-center justify-center gap-2 rounded-lg border border-white/30 bg-[#0b2017]/80 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-xs hover:-translate-y-px hover:border-white/55 hover:bg-[#143325]/95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:translate-y-0 active:scale-[0.98] sm:w-auto sm:whitespace-nowrap">
                         <i data-lucide="search" class="h-4 w-4 shrink-0 text-[#f3cf7a]" aria-hidden="true"></i>
                         <span>Telusuri Direktori ({{ number_format($heroSummary['total_layanan'], 0, ',', '.') }})</span>
                     </a>
@@ -61,7 +60,7 @@
             <aside id="rekap"
                    data-hero-stagger
                    aria-labelledby="rekap-judul"
-                   class="talas-hero-sheet min-w-0 overflow-hidden rounded-2xl border border-white/25 bg-[#fafaf7] text-[#10231b]">
+                   class="talas-hero-sheet min-w-0 overflow-hidden rounded-2xl border border-white/25 bg-[#f6f5f0] text-[#10231b]">
                 <div class="border-b border-[#e5ebe6] bg-white px-5 pt-5 pb-4 sm:px-6 sm:pt-6 sm:pb-5">
                     <h2 id="rekap-judul" class="font-display text-sm font-bold tracking-[-0.01em] text-[#10231b]">
                         Rekapitulasi Layanan Kabupaten Bogor
@@ -84,7 +83,7 @@
 
                     {{-- Batang proporsi aktual berbanding total layanan --}}
                     <div data-rekap-bar
-                         class="mt-4 flex h-2.5 w-full gap-[2px] overflow-hidden rounded-xs bg-[#e1e7e2] p-[2px]"
+                         class="mt-4 flex h-3 w-full gap-[2px] overflow-hidden rounded-xs bg-[#e3e8e4] p-[2px]"
                          role="img"
                          aria-label="{{ $heroSummary['composition_label'] }}">
                         @foreach ($heroSummary['segments'] as $seg)
@@ -111,19 +110,14 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="flex shrink-0 items-center gap-2.5">
-                                <div class="text-right">
-                                    <span data-countup="{{ $seg['jumlah'] }}"
-                                          class="font-display block text-lg font-bold leading-none tabular-nums text-[#10231b] group-hover:text-[#1b4332] sm:text-[1.25rem]">
-                                        {{ number_format($seg['jumlah'], 0, ',', '.') }}
-                                    </span>
-                                    <span class="mt-1 block text-xs font-semibold tabular-nums text-[#3f5249]">
-                                        {{ $seg['share_label'] }}
-                                    </span>
-                                </div>
-                                <i data-lucide="chevron-right"
-                                   class="h-4 w-4 shrink-0 text-[#3f5249] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-[#1b4332]"
-                                   aria-hidden="true"></i>
+                            <div class="shrink-0 text-right">
+                                <span data-countup="{{ $seg['jumlah'] }}"
+                                      class="font-display block text-lg font-bold leading-none tabular-nums text-[#10231b] group-hover:text-[#1b4332] sm:text-[1.25rem]">
+                                    {{ number_format($seg['jumlah'], 0, ',', '.') }}
+                                </span>
+                                <span class="mt-1 block text-xs font-semibold tabular-nums text-[#3f5249]">
+                                    {{ $seg['share_label'] }}
+                                </span>
                             </div>
                         </a>
                     @endforeach

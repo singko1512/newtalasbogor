@@ -6,18 +6,20 @@
     @include('partials.header', ['meta' => $meta])
 
     <main id="konten-utama">
-        @include('partials.hero', [
-            'meta' => $meta,
-            'hero' => $hero,
-            'heroSummary' => $heroSummary,
-        ])
-        @include('partials.layanan', [
-            'layananUtama' => $layananUtama,
-            'sopList' => $sopList,
-            'serviceFilters' => $serviceFilters,
-            'sopArchiveUrl' => $sopArchiveUrl,
-            'loginUrl' => $meta['login_url'],
-        ])
+        <div class="relative bg-[#0b2017]" data-hero-layanan-curtain>
+            @include('partials.hero', [
+                'meta' => $meta,
+                'hero' => $hero,
+                'heroSummary' => $heroSummary,
+            ])
+            @include('partials.layanan', [
+                'layananUtama' => $layananUtama,
+                'sopList' => $sopList,
+                'serviceFilters' => $serviceFilters,
+                'sopArchiveUrl' => $sopArchiveUrl,
+                'loginUrl' => $meta['login_url'],
+            ])
+        </div>
         @include('partials.direktori', [
             'meta' => $meta,
             'direktori' => $direktori,

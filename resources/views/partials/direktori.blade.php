@@ -165,7 +165,6 @@
                                            class="talas-transition inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-[#c5d3c9] bg-white px-3.5 py-2 text-xs font-bold text-[#1b4332] shadow-2xs hover:border-[#1b4332] hover:bg-[#1b4332] hover:text-white">
                                             <i data-lucide="server" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
                                             <span>Sebaran Server &amp; Layanan</span>
-                                            <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
                                         </a>
                                         <a href="{{ $meta['assesment_url'] }}"
                                            target="_blank"
@@ -173,7 +172,6 @@
                                            class="talas-transition inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-[#c5d3c9] bg-white px-3.5 py-2 text-xs font-bold text-[#1b4332] shadow-2xs hover:border-[#1b4332] hover:bg-[#1b4332] hover:text-white">
                                             <i data-lucide="clipboard-check" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
                                             <span>Asesmen 57 Layanan</span>
-                                            <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
                                         </a>
                                     </div>
                                 @elseif ($tabKey === 'website' && ! empty($tabData['scoreweb_links']))
@@ -185,7 +183,6 @@
                                                class="talas-transition inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-[#c5d3c9] bg-white px-3.5 py-2 text-xs font-bold text-[#1b4332] shadow-2xs hover:border-[#1b4332] hover:bg-[#1b4332] hover:text-white">
                                                 <i data-lucide="bar-chart-3" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
                                                 <span>{{ $scoreLink['label'] }}</span>
-                                                <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
                                             </a>
                                         @endforeach
                                     </div>
@@ -413,9 +410,8 @@
                                 <a href="{{ $meta['dashboard_layanan_url'] }}"
                                    target="_blank"
                                    rel="noopener noreferrer"
-                                   class="inline-flex min-h-[44px] items-center gap-1 px-1.5 font-bold text-[#1b4332] hover:underline sm:ml-1">
-                                    <span>Dashboard Layanan</span>
-                                    <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
+                                   class="inline-flex min-h-[44px] items-center px-1.5 font-bold text-[#1b4332] hover:underline sm:ml-1">
+                                    Dashboard Layanan
                                 </a>
                             </div>
                         </div>

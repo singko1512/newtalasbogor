@@ -77,9 +77,8 @@
                             <a href="{{ $tautan['url'] }}"
                                target="_blank"
                                rel="noopener noreferrer"
-                               class="talas-transition group flex min-h-[44px] items-center justify-between gap-2.5 rounded-lg border border-white/10 bg-white/5 px-3.5 py-2.5 text-xs font-medium text-[#c7d7cd] hover:border-white/25 hover:bg-white/10 hover:text-white focus-visible:outline-[#e7c172]">
+                               class="talas-transition flex min-h-[44px] items-center rounded-lg border border-white/10 bg-white/5 px-3.5 py-2.5 text-xs font-medium text-[#c7d7cd] hover:border-white/25 hover:bg-white/10 hover:text-white focus-visible:outline-[#e7c172]">
                                 <span>{{ $tautan['label'] }}</span>
-                                <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0 text-[#e7c172] opacity-80 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" aria-hidden="true"></i>
                                 <span class="sr-only"> (buka di tab baru)</span>
                             </a>
                         </li>

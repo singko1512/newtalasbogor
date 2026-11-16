@@ -1,7 +1,6 @@
 import { animate, inView, scroll, stagger } from 'motion';
 import {
     Activity,
-    ArrowUpRight,
     BarChart3,
     Building,
     Building2,
@@ -35,7 +34,6 @@ import {
 
 const LUCIDE_ICONS = {
     Activity,
-    ArrowUpRight,
     BarChart3,
     Building,
     Building2,
@@ -436,56 +434,6 @@ function initScrollSections() {
     };
 }
 
-function initHeroParallax() {
-    const heroBg = document.querySelector('[data-parallax-hero-bg]');
-    const heroContainer = document.querySelector('[data-hero-container]');
-    const heroContent = document.querySelector('[data-parallax-hero-content]');
-    const heroScrim = document.querySelector('[data-parallax-hero-scrim]');
-
-    if (!heroBg || !heroContainer || prefersReducedMotion()) {
-        return;
-    }
-
-    let isTicking = false;
-
-    const updateParallax = () => {
-        const scrollY = window.scrollY;
-        const heroHeight = heroContainer.offsetHeight || 650;
-
-        if (scrollY <= heroHeight + 120) {
-            const progress = Math.min(1, Math.max(0, scrollY / heroHeight));
-
-            // Optical parallax: background image travels at 0.36x scroll delta with subtle depth scale
-            const bgTranslateY = scrollY * 0.36;
-            const bgScale = 1.05 + progress * 0.05;
-            heroBg.style.transform = `translate3d(0, ${bgTranslateY.toFixed(2)}px, 0) scale(${bgScale.toFixed(3)})`;
-
-            // Foreground content shifts gently at 0.08x scroll delta
-            if (heroContent) {
-                const contentTranslateY = scrollY * 0.08;
-                const contentOpacity = Math.max(0.12, 1 - progress * 1.08);
-                heroContent.style.transform = `translate3d(0, ${contentTranslateY.toFixed(2)}px, 0)`;
-                heroContent.style.opacity = contentOpacity.toFixed(3);
-            }
-
-            // Scrim deepens smoothly as user scrolls towards lower sections
-            if (heroScrim) {
-                heroScrim.style.opacity = (0.86 + progress * 0.14).toFixed(3);
-            }
-        }
-        isTicking = false;
-    };
-
-    window.addEventListener('scroll', () => {
-        if (!isTicking) {
-            window.requestAnimationFrame(updateParallax);
-            isTicking = true;
-        }
-    }, { passive: true });
-
-    updateParallax();
-}
-
 function initScrollProgress() {
     const progressEl = document.querySelector('[data-scroll-progress]');
     if (!progressEl || prefersReducedMotion()) {
@@ -548,7 +496,7 @@ function initHeaderScrollSpy() {
     const MOBILE_IDLE = ['text-[#10231b]', 'font-medium', 'hover:bg-[#edf2ed]'];
 
     const navGlide = createGlideIndicator(desktopNav, {
-        pillClass: 'rounded-lg bg-[#edf2ed] shadow-[inset_0_-2px_0_#1b4332]',
+        pillClass: 'rounded-lg bg-[#1b4332]/[0.08] shadow-[inset_0_-2px_0_#1b4332]',
     });
 
     let activeSectionId = null;
@@ -597,7 +545,7 @@ function initHeaderScrollSpy() {
         })
         .filter(Boolean);
 
-    const heroSection = document.querySelector('#konten-utama > section');
+    const heroSection = document.querySelector('[data-hero-section]') || document.querySelector('#konten-utama > section');
     const footerEl = document.getElementById('kontak');
 
     if (!targets.length) {
@@ -745,7 +693,7 @@ function createSmoothScroller(scrollController) {
 
         const startY = window.scrollY;
         const delta = destinationY - startY;
-        const duration = Math.min(720, Math.max(400, 320 + Math.abs(delta) * 0.14));
+        const duration = Math.min(820, Math.max(480, 380 + Math.abs(delta) * 0.16));
         const startTime = performance.now();
         let revealedNearEnd = false;
 
@@ -767,16 +715,16 @@ function createSmoothScroller(scrollController) {
             window.removeEventListener('keydown', onKeyInterrupt);
         };
 
-        const easeInOutCubic = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+        const easeInOutQuart = (t) => (t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2);
 
         const tick = (now) => {
             const elapsed = now - startTime;
             const progress = Math.min(1, elapsed / duration);
-            const nextY = startY + delta * easeInOutCubic(progress);
+            const nextY = startY + delta * easeInOutQuart(progress);
 
             window.scrollTo({ top: nextY, behavior: 'instant' });
 
-            if (!revealedNearEnd && progress >= 0.72) {
+            if (!revealedNearEnd && progress >= 0.58) {
                 revealedNearEnd = true;
                 scrollController.revealNow(targetSection);
             }
@@ -828,7 +776,14 @@ function initMotionEntrance() {
         return;
     }
 
+    const heroSection = document.querySelector('[data-hero-section]');
+    const layananSection = document.getElementById('layanan');
+    const heroBg = heroSection?.querySelector('[data-hero-bg]');
+    const heroStage = heroSection?.querySelector('[data-hero-stage]');
+    const curtainVeil = heroSection?.querySelector('[data-hero-curtain-veil]');
     const heroItems = Array.from(document.querySelectorAll('[data-hero-stagger]'));
+    const counters = Array.from(document.querySelectorAll('[data-countup]'));
+
     if (heroItems.length) {
         animate(
             heroItems,
@@ -837,7 +792,6 @@ function initMotionEntrance() {
         );
     }
 
-    const counters = Array.from(document.querySelectorAll('[data-countup]'));
     counters.forEach((el) => {
         const target = Number.parseInt(el.getAttribute('data-countup') || '', 10);
         if (!Number.isFinite(target) || target <= 0) {
@@ -862,6 +816,76 @@ function initMotionEntrance() {
             { amount: 0.25 },
         );
     });
+
+    if (heroSection && layananSection) {
+        const headerBar = document.querySelector('header > div');
+        const serviceList = layananSection.querySelector('[data-service-list]');
+
+        const syncHeroStickyTop = () => {
+            const headerHeight = headerBar ? Math.round(headerBar.getBoundingClientRect().height) : 68;
+            const heroHeight = heroSection.offsetHeight;
+            const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+            const stickyTop = heroHeight <= viewportHeight - headerHeight + 20
+                ? headerHeight
+                : Math.round(viewportHeight - heroHeight);
+            heroSection.style.top = `${stickyTop}px`;
+        };
+
+        syncHeroStickyTop();
+        window.addEventListener('resize', syncHeroStickyTop, { passive: true });
+        if (typeof ResizeObserver !== 'undefined') {
+            const heroRo = new ResizeObserver(syncHeroStickyTop);
+            heroRo.observe(heroSection);
+            if (headerBar) {
+                heroRo.observe(headerBar);
+            }
+        }
+
+        scroll(
+            (progress) => {
+                const raw = Math.max(0, Math.min(1, Number.isFinite(progress) ? progress : 0));
+                const t = raw * raw * (3 - 2 * raw);
+
+                if (heroBg) {
+                    heroBg.style.transform = t <= 0.002
+                        ? ''
+                        : `scale(${(1 + t * 0.06).toFixed(4)})`;
+                }
+
+                if (heroStage) {
+                    heroStage.style.transform = t <= 0.002
+                        ? ''
+                        : `translate3d(0, ${(t * -30).toFixed(2)}px, 0) scale(${(1 - t * 0.06).toFixed(4)})`;
+                    heroStage.style.opacity = t <= 0.002
+                        ? ''
+                        : (1 - t * 0.68).toFixed(3);
+                }
+
+                if (curtainVeil) {
+                    curtainVeil.style.opacity = t <= 0.002
+                        ? '0'
+                        : (t * 0.6).toFixed(3);
+                }
+
+                if (serviceList) {
+                    const cardPhase = Math.max(0, Math.min(1, raw / 0.85));
+                    const cardEase = 1 - Math.pow(1 - cardPhase, 3);
+                    const liftY = (1 - cardEase) * 28;
+                    if (cardEase >= 0.996) {
+                        serviceList.style.transform = '';
+                        serviceList.style.opacity = '';
+                    } else {
+                        serviceList.style.transform = `translate3d(0, ${liftY.toFixed(2)}px, 0)`;
+                        serviceList.style.opacity = (0.76 + cardEase * 0.24).toFixed(3);
+                    }
+                }
+            },
+            {
+                target: layananSection,
+                offset: ['start end', 'start start'],
+            },
+        );
+    }
 
     const domainBars = Array.from(document.querySelectorAll('[data-domain-progress]'));
     domainBars.forEach((bar, index) => {
@@ -1853,12 +1877,7 @@ function initModals(closeMobileNav) {
             const docName = createNode('span', 'font-medium text-[#10231b]', doc.nama || doc.dokumen || 'Dokumen SOP');
             left.append(codeBadge, sep, docName);
 
-            const right = createNode('span', 'inline-flex shrink-0 items-center gap-1 font-mono text-[11px] font-semibold text-[#3f5249]');
-            right.append(createNode('span', '', 'PDF'));
-            const arrowIcon = createNode('i', 'h-3.5 w-3.5 shrink-0 text-[#1b4332]');
-            arrowIcon.setAttribute('data-lucide', 'arrow-up-right');
-            arrowIcon.setAttribute('aria-hidden', 'true');
-            right.append(arrowIcon);
+            const right = createNode('span', 'shrink-0 font-mono text-[11px] font-semibold text-[#3f5249]', 'PDF');
 
             docLink.append(left, right);
             sopListEl.append(docLink);
@@ -2348,7 +2367,6 @@ const init = () => {
 
     initSmoothNavigation(smoothScrollTo, closeMobileNav);
     initScrollProgress();
-    initHeroParallax();
     initHeaderSurface();
     initHeaderScrollSpy();
     initHeroQuickTabs(setDirectoryTab, smoothScrollTo);

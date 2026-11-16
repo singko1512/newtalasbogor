@@ -114,17 +114,15 @@
                    href="{{ $sopArchiveUrl ?? 'https://talas.bogorkab.go.id/index.php?pgtype=soplayanan' }}"
                    target="_blank"
                    rel="noopener noreferrer"
-                   class="talas-transition inline-flex min-h-[44px] items-center justify-center gap-1.5 whitespace-nowrap rounded-lg border border-[#d6ded7] bg-white px-3 text-xs font-semibold text-[#1b4332] hover:border-[#1b4332] sm:px-4">
-                    <span>Unduh PDF SOP</span>
-                    <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
+                   class="talas-transition inline-flex min-h-[44px] items-center justify-center whitespace-nowrap rounded-lg border border-[#d6ded7] bg-white px-3 text-xs font-semibold text-[#1b4332] hover:border-[#1b4332] sm:px-4">
+                    Unduh PDF SOP
                 </a>
                 <a data-modal-service-archive-fallback
                    href="{{ $sopArchiveUrl ?? 'https://talas.bogorkab.go.id/index.php?pgtype=soplayanan' }}"
                    target="_blank"
                    rel="noopener noreferrer"
-                   class="talas-transition hidden min-h-[44px] items-center justify-center gap-1.5 rounded-lg border border-[#d6ded7] bg-white px-3 text-xs font-semibold text-[#1b4332] hover:border-[#1b4332] sm:px-4">
-                    <span>Arsip {{ $sopCount ?? 10 }} SOP</span>
-                    <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
+                   class="talas-transition hidden min-h-[44px] items-center justify-center rounded-lg border border-[#d6ded7] bg-white px-3 text-xs font-semibold text-[#1b4332] hover:border-[#1b4332] sm:px-4">
+                    Arsip {{ $sopCount ?? 10 }} SOP
                 </a>
                 <button type="button"
                         data-close-modal
@@ -142,9 +140,8 @@
                 <a href="{{ $meta['login_url'] }}"
                    target="_blank"
                    rel="noopener noreferrer"
-                   class="talas-transition inline-flex min-h-[44px] w-full items-center justify-center gap-1.5 rounded-lg bg-[#1b4332] px-4 text-xs font-semibold text-white hover:bg-[#143325] sm:w-auto">
-                    <span>Ajukan via Login Portal</span>
-                    <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
+                   class="talas-transition inline-flex min-h-[44px] w-full items-center justify-center rounded-lg bg-[#1b4332] px-4 text-xs font-semibold text-white hover:bg-[#143325] sm:w-auto">
+                    Ajukan via Login Portal
                 </a>
             </div>
         </div>
@@ -262,9 +259,8 @@
                                 <a href="{{ $role['alt_login_url'] }}"
                                    target="_blank"
                                    rel="noopener noreferrer"
-                                   class="inline-flex items-center gap-1 font-semibold text-[#1b4332] hover:underline">
-                                    <span>{{ $role['alt_login_label'] ?? 'Login Admin' }}</span>
-                                    <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
+                                   class="inline-flex items-center font-semibold text-[#1b4332] hover:underline">
+                                    {{ $role['alt_login_label'] ?? 'Login Admin' }}
                                 </a>
                             </p>
                         @endif

@@ -28,7 +28,6 @@
                        class="talas-transition inline-flex min-h-[46px] w-full items-center justify-center gap-2 rounded-lg border-b-2 border-[#0b2017] bg-[#1b4332] px-5 py-2.5 text-sm font-bold text-white hover:bg-[#143325] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332] active:scale-[0.98] sm:w-auto">
                         <i data-lucide="lock" class="h-4 w-4 shrink-0" aria-hidden="true"></i>
                         <span>Masuk Portal Tiket Resmi</span>
-                        <i data-lucide="arrow-up-right" class="h-4 w-4 shrink-0" aria-hidden="true"></i>
                         <span class="sr-only"> (buka di tab baru)</span>
                     </a>
                     <button type="button"
@@ -104,9 +103,8 @@
                                                 <a href="{{ $role['alt_login_url'] }}"
                                                    target="_blank"
                                                    rel="noopener noreferrer"
-                                                   class="inline-flex min-h-[44px] items-center gap-1 rounded-lg px-2 text-xs font-semibold text-[#784f14] hover:text-[#10231b] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
+                                                   class="inline-flex min-h-[44px] items-center rounded-lg px-2 text-xs font-semibold text-[#784f14] hover:text-[#10231b] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
                                                     <span>{{ $role['alt_login_label'] ?? 'Login Admin' }}</span>
-                                                    <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
                                                     <span class="sr-only"> (buka di tab baru)</span>
                                                 </a>
                                             @endif
@@ -114,10 +112,9 @@
                                                     data-open-portal-modal
                                                     data-portal-role-target="{{ $roleKey }}"
                                                     aria-haspopup="dialog"
-                                                    class="talas-transition group/role inline-flex min-h-[44px] cursor-pointer items-center gap-1 rounded-lg px-2 text-xs font-bold text-[#1b4332] hover:bg-[#edf2ed] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
+                                                    class="talas-transition inline-flex min-h-[44px] cursor-pointer items-center rounded-lg px-2 text-xs font-bold text-[#1b4332] hover:bg-[#edf2ed] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
                                                 <span>Lihat panduan</span>
                                                 <span class="sr-only"> {{ $role['peran'] }}</span>
-                                                <i data-lucide="chevron-right" class="h-4 w-4 shrink-0 transition-transform duration-200 group-hover/role:translate-x-0.5" aria-hidden="true"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -168,9 +165,8 @@
                                 data-open-service-modal
                                 data-service-slug="pemulihan-website"
                                 aria-haspopup="dialog"
-                                class="talas-transition group/sop -ml-2 mt-2 inline-flex min-h-[44px] cursor-pointer items-center gap-1 rounded-lg px-2 text-xs font-bold text-[#1b4332] hover:bg-white/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
-                            <span>Lihat alur lengkap SOP 04</span>
-                            <i data-lucide="chevron-right" class="h-4 w-4 shrink-0 transition-transform duration-200 group-hover/sop:translate-x-0.5" aria-hidden="true"></i>
+                                class="talas-transition -ml-2 mt-2 inline-flex min-h-[44px] cursor-pointer items-center rounded-lg px-2 text-xs font-bold text-[#1b4332] hover:bg-white/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
+                            Lihat alur lengkap SOP 04
                         </button>
                     </div>
                 </div>

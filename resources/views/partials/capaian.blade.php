@@ -45,9 +45,8 @@
                                     <a href="{{ $spbe['url'] }}"
                                        target="_blank"
                                        rel="noopener noreferrer"
-                                       class="-my-1 inline-flex min-h-[44px] items-center gap-1 py-1.5 text-xs font-semibold text-[#1b4332] hover:text-[#0b2017] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
+                                       class="-my-1 inline-flex min-h-[44px] items-center py-1.5 text-xs font-semibold text-[#1b4332] hover:text-[#0b2017] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
                                         <span>Rincian {{ $spbe['total_indikator'] }} Indikator SPBE</span>
-                                        <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
                                         <span class="sr-only"> (buka di tab baru)</span>
                                     </a>
                                 @endif
@@ -191,16 +190,11 @@
                                         <a href="{{ $regLink['url'] }}"
                                            target="_blank"
                                            rel="noopener noreferrer"
-                                           class="talas-transition group flex min-h-[44px] items-center justify-between gap-3 rounded-lg border border-[#dce4de] bg-white px-3.5 py-2 text-xs font-semibold text-[#10231b] hover:border-[#1b4332] hover:bg-[#edf2ed]/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
-                                            <span class="flex min-w-0 items-center gap-2.5">
-                                                <i data-lucide="{{ $isPdfDoc ? 'file-text' : 'globe' }}"
-                                                   class="h-4 w-4 shrink-0 {{ $isPdfDoc ? 'text-[#784f14]' : 'text-[#1b4332]' }}"
-                                                   aria-hidden="true"></i>
-                                                <span class="leading-snug">{{ $regLink['label'] }}</span>
-                                            </span>
-                                            <i data-lucide="arrow-up-right"
-                                               class="h-3.5 w-3.5 shrink-0 text-[#3f5249] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[#1b4332]"
+                                           class="talas-transition flex min-h-[44px] items-center gap-2.5 rounded-lg border border-[#dce4de] bg-white px-3.5 py-2 text-xs font-semibold text-[#10231b] hover:border-[#1b4332] hover:bg-[#edf2ed]/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
+                                            <i data-lucide="{{ $isPdfDoc ? 'file-text' : 'globe' }}"
+                                               class="h-4 w-4 shrink-0 {{ $isPdfDoc ? 'text-[#784f14]' : 'text-[#1b4332]' }}"
                                                aria-hidden="true"></i>
+                                            <span class="min-w-0 leading-snug">{{ $regLink['label'] }}</span>
                                             <span class="sr-only"> (buka di tab baru)</span>
                                         </a>
                                     </li>
@@ -220,9 +214,8 @@
                             <a href="{{ $smartCity['url'] }}"
                                target="_blank"
                                rel="noopener noreferrer"
-                               class="-my-2 inline-flex min-h-[44px] items-center gap-1 px-1 text-xs font-semibold text-[#1b4332] hover:text-[#0b2017] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
+                               class="-my-2 inline-flex min-h-[44px] items-center px-1 text-xs font-semibold text-[#1b4332] hover:text-[#0b2017] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
                                 <span>Halaman Smart City</span>
-                                <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
                                 <span class="sr-only"> (buka di tab baru)</span>
                             </a>
                         @endif
@@ -386,7 +379,6 @@
                                            class="-my-1 inline-flex min-h-[44px] items-center gap-1.5 py-1.5 text-xs font-semibold text-[#1b4332] hover:text-[#0b2017] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
                                             <i data-lucide="file-text" class="h-3.5 w-3.5 shrink-0 text-[#784f14]" aria-hidden="true"></i>
                                             <span>Unduh {{ $regulasi['dokumen_label'] ?? 'Dokumen PDF' }}</span>
-                                            <i data-lucide="arrow-up-right" class="h-3 w-3 shrink-0" aria-hidden="true"></i>
                                             <span class="sr-only"> (buka di tab baru)</span>
                                         </a>
                                     @endif
@@ -495,9 +487,8 @@
                                 <a href="{{ $loginMod['url'] }}"
                                    target="_blank"
                                    rel="noopener noreferrer"
-                                   class="talas-transition inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-lg bg-[#d49b35] px-4 py-2 text-xs font-bold text-[#0b2017] hover:bg-[#e1aa44] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f2c66d]">
+                                   class="talas-transition inline-flex min-h-[44px] items-center justify-center rounded-lg bg-[#d49b35] px-4 py-2 text-xs font-bold text-[#0b2017] hover:bg-[#e1aa44] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f2c66d]">
                                     <span>Masuk Portal Operator</span>
-                                    <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
                                     <span class="sr-only"> (buka di tab baru)</span>
                                 </a>
 
@@ -505,9 +496,8 @@
                                     <a href="{{ $loginMod['tautan_sekunder']['url'] }}"
                                        target="_blank"
                                        rel="noopener noreferrer"
-                                       class="talas-transition inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-lg border border-white/25 px-3.5 py-2 text-xs font-semibold text-white hover:border-white/55 hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f2c66d]">
+                                       class="talas-transition inline-flex min-h-[44px] items-center justify-center rounded-lg border border-white/25 px-3.5 py-2 text-xs font-semibold text-white hover:border-white/55 hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f2c66d]">
                                         <span>{{ $loginMod['tautan_sekunder']['label'] }}</span>
-                                        <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
                                         <span class="sr-only"> (buka di tab baru)</span>
                                     </a>
                                 @endif
@@ -628,9 +618,8 @@
                                 <a href="{{ $skmMod['url'] }}"
                                    target="_blank"
                                    rel="noopener noreferrer"
-                                   class="talas-transition inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-lg border border-[#1b4332] bg-white px-4 py-2 text-xs font-semibold text-[#1b4332] hover:bg-[#1b4332] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
+                                   class="talas-transition inline-flex min-h-[44px] items-center justify-center rounded-lg border border-[#1b4332] bg-white px-4 py-2 text-xs font-semibold text-[#1b4332] hover:bg-[#1b4332] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
                                     <span>Buka Dashboard SKM</span>
-                                    <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
                                     <span class="sr-only"> (buka di tab baru)</span>
                                 </a>
                             </div>
@@ -680,9 +669,8 @@
                                     <a href="{{ $mod['url'] }}"
                                        target="_blank"
                                        rel="noopener noreferrer"
-                                       class="-my-0.5 inline-flex min-h-[44px] items-center gap-1.5 py-1.5 text-xs font-semibold text-[#1b4332] hover:text-[#0b2017] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
+                                       class="-my-0.5 inline-flex min-h-[44px] items-center py-1.5 text-xs font-semibold text-[#1b4332] hover:text-[#0b2017] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
                                         <span>{{ $modMeta['cta'] }}</span>
-                                        <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
                                         <span class="sr-only"> (buka di tab baru)</span>
                                     </a>
 
@@ -690,9 +678,8 @@
                                         <a href="{{ $mod['tautan_sekunder']['url'] }}"
                                            target="_blank"
                                            rel="noopener noreferrer"
-                                           class="-my-0.5 inline-flex min-h-[44px] items-center gap-1.5 py-1.5 text-xs font-semibold text-[#784f14] hover:text-[#10231b] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
+                                           class="-my-0.5 inline-flex min-h-[44px] items-center py-1.5 text-xs font-semibold text-[#784f14] hover:text-[#10231b] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
                                             <span>{{ $mod['tautan_sekunder']['label'] }}</span>
-                                            <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0" aria-hidden="true"></i>
                                             <span class="sr-only"> (buka di tab baru)</span>
                                         </a>
                                     @elseif (! empty($modMeta['sub']))
