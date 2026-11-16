@@ -1,12 +1,4 @@
 @php
-    $navigasiBagian = [
-        ['label' => 'Katalog 9 Layanan', 'href' => '#layanan'],
-        ['label' => 'Direktori Aplikasi & Desa.id', 'href' => '#direktori'],
-        ['label' => 'Capaian SPBE & Smart City', 'href' => '#capaian'],
-        ['label' => 'Ekosistem Monitoring & SKM', 'href' => '#ekosistem'],
-        ['label' => 'Akses Portal & Tiket', 'href' => '#lacak-tiket'],
-    ];
-
     $tautanResmi = [
         ['label' => 'Portal Login Operator', 'url' => $meta['login_url']],
         ['label' => 'Login Admin Diskominfo', 'url' => $meta['admin_login_url']],
@@ -19,22 +11,22 @@
 
 <footer id="kontak" class="overflow-hidden border-t border-[#d49b35]/35 bg-[#10231b] text-[#e8efe9]">
     <div data-scroll-section data-scroll-fade-only class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-14">
-        <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-12 lg:items-start lg:gap-12">
+        <div class="grid gap-10 lg:grid-cols-12 lg:items-start lg:gap-14">
             {{-- Kolom 1: Identitas Resmi & Kontak Diskominfo Kabupaten Bogor --}}
-            <div class="min-w-0 md:col-span-2 lg:col-span-5">
-                <a href="#konten-utama" class="inline-flex min-h-[44px] items-center gap-3 rounded-xl bg-white px-3.5 py-2 shadow-sm focus-visible:outline-[#e7c172]">
+            <div class="min-w-0 lg:col-span-7">
+                <a href="#konten-utama" class="inline-flex min-h-[44px] items-center gap-3 focus-visible:outline-[#e7c172]">
                     <img src="{{ asset('images/logo-diskominfo-bogorkab.png') }}"
                          alt="Logo Diskominfo Kabupaten Bogor"
-                         width="160"
-                         height="38"
-                         class="h-8 w-auto object-contain">
+                         width="168"
+                         height="42"
+                         class="h-9 sm:h-10 w-auto object-contain drop-shadow-sm">
                 </a>
 
                 <p class="font-display mt-4 text-base font-bold text-white">
                     Talas Bogor &middot; {{ $meta['kepanjangan'] }}
                 </p>
 
-                <p class="mt-2 max-w-md text-sm leading-relaxed text-[#c7d7cd]">
+                <p class="mt-2 max-w-lg text-sm leading-relaxed text-[#c7d7cd]">
                     Pengelola layanan domain, hosting, email kedinasan, dan pengamanan aplikasi Pemerintah Kabupaten Bogor.
                 </p>
 
@@ -74,37 +66,20 @@
                 </dl>
             </div>
 
-            {{-- Kolom 2: Navigasi Seksi Portal --}}
-            <div class="min-w-0 md:col-span-1 lg:col-span-3">
-                <h2 class="font-display text-sm font-bold tracking-[0.01em] text-white">
-                    Navigasi Portal
-                </h2>
-                <ul class="mt-2.5 space-y-0.5 text-sm">
-                    @foreach ($navigasiBagian as $nav)
-                        <li>
-                            <a href="{{ $nav['href'] }}"
-                               class="talas-transition inline-flex min-h-[44px] w-full items-center rounded-xs text-[#c7d7cd] hover:text-white hover:underline focus-visible:outline-[#e7c172]">
-                                {{ $nav['label'] }}
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-
-            {{-- Kolom 3: Ekosistem & Tautan Resmi TALAS --}}
-            <div class="min-w-0 md:col-span-1 lg:col-span-4">
+            {{-- Kolom 2: Ekosistem & Tautan Resmi TALAS --}}
+            <div class="min-w-0 lg:col-span-5">
                 <h2 class="font-display text-sm font-bold tracking-[0.01em] text-white">
                     Ekosistem Sistem Resmi
                 </h2>
-                <ul class="mt-2.5 space-y-0.5 text-sm">
+                <ul class="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-1">
                     @foreach ($tautanResmi as $tautan)
                         <li>
                             <a href="{{ $tautan['url'] }}"
                                target="_blank"
                                rel="noopener noreferrer"
-                               class="talas-transition group inline-flex min-h-[44px] w-full items-center justify-between gap-2 rounded-xs text-[#c7d7cd] hover:text-white hover:underline focus-visible:outline-[#e7c172]">
+                               class="talas-transition group flex min-h-[44px] items-center justify-between gap-2.5 rounded-lg border border-white/10 bg-white/5 px-3.5 py-2.5 text-xs font-medium text-[#c7d7cd] hover:border-white/25 hover:bg-white/10 hover:text-white focus-visible:outline-[#e7c172]">
                                 <span>{{ $tautan['label'] }}</span>
-                                <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0 opacity-75 group-hover:opacity-100" aria-hidden="true"></i>
+                                <i data-lucide="arrow-up-right" class="h-3.5 w-3.5 shrink-0 text-[#e7c172] opacity-80 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" aria-hidden="true"></i>
                                 <span class="sr-only"> (buka di tab baru)</span>
                             </a>
                         </li>

@@ -1,7 +1,7 @@
 <section id="capaian" aria-labelledby="capaian-judul" class="border-b border-[#d6ded7] bg-white py-14 lg:py-18">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div data-scroll-section data-scroll-fade-only data-scrollspy-section="capaian">
-            <div class="flex flex-col gap-5 border-b border-[#d6ded7] pb-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+        <div data-scroll-section data-scrollspy-section="capaian">
+            <div data-scroll-reveal class="flex flex-col gap-5 border-b border-[#d6ded7] pb-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
                 <div class="max-w-2xl">
                     <p class="text-xs font-semibold text-[#784f14]">
                         Evaluasi Kinerja Pemerintahan Digital
@@ -28,7 +28,7 @@
 
             <div class="mt-8 grid gap-8 lg:grid-cols-12 lg:items-stretch">
                 {{-- Panel Kiri: Scoreboard, 4 Domain, Rincian 8 Aspek & Rujukan SPBE --}}
-                <article id="spbe" aria-labelledby="spbe-judul" class="flex min-w-0 flex-col justify-between overflow-hidden rounded-xl border border-[#d6ded7] bg-white lg:col-span-7">
+                <article id="spbe" data-scroll-reveal aria-labelledby="spbe-judul" class="flex min-w-0 flex-col justify-between overflow-hidden rounded-xl border border-[#d6ded7] bg-white lg:col-span-7">
                     {{-- Header Scoreboard Indeks SPBE --}}
                     <div class="border-b border-[#e5ebe6] bg-[#fafaf7] px-5 py-5 sm:px-6">
                         <div class="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
@@ -81,7 +81,7 @@
                                 <h4 class="text-xs font-bold text-[#10231b]">Rekapitulasi Nilai 4 Domain SPBE ({{ $spbe['tahun'] ?? '2025' }})</h4>
                                 <span class="text-xs text-[#3f5249]">Skala 0-5 &middot; perbandingan 2024 ke {{ $spbe['tahun'] ?? '2025' }}</span>
                             </div>
-                            <dl class="grid grid-cols-2 border-t border-[#e5ebe6] sm:grid-cols-4">
+                            <dl data-scroll-stagger class="grid grid-cols-2 border-t border-[#e5ebe6] sm:grid-cols-4">
                                 @foreach ($spbe['domain_ringkas'] as $dom)
                                     @php
                                         $domNumeric = (float) str_replace(',', '.', (string) ($dom['nilai_2025'] ?? '0'));
@@ -95,7 +95,7 @@
                                             <span class="text-xs font-semibold tabular-nums {{ str_starts_with($dom['selisih'], '+') ? 'text-[#166534]' : (str_starts_with($dom['selisih'], '-') ? 'text-[#991b1b]' : 'text-[#3f5249]') }}">{{ $dom['selisih'] }}</span>
                                         </dd>
                                         <div class="mt-2 h-1 w-full overflow-hidden rounded-xs bg-[#e5ebe6]" aria-hidden="true">
-                                            <span class="block h-full rounded-xs bg-[#1b4332]" style="width: {{ $domBarPct }}%"></span>
+                                            <span data-domain-progress="{{ $domBarPct }}%" class="block h-full origin-left rounded-xs bg-[#1b4332] will-change-transform" style="width: {{ $domBarPct }}%"></span>
                                         </div>
                                     </div>
                                 @endforeach
@@ -211,7 +211,7 @@
                 </article>
 
                 {{-- Panel Kanan: Perkembangan Smart City & Distribusi 7 Dimensi --}}
-                <article id="smartcity" aria-labelledby="smartcity-judul" class="min-w-0 rounded-xl border border-[#d6ded7] bg-[#f6f5f0] p-5 sm:p-6 lg:col-span-5">
+                <article id="smartcity" data-scroll-reveal aria-labelledby="smartcity-judul" class="min-w-0 rounded-xl border border-[#d6ded7] bg-[#f6f5f0] p-5 sm:p-6 lg:col-span-5">
                     <div class="flex flex-wrap items-start justify-between gap-2">
                         <h3 id="smartcity-judul" class="font-display text-lg font-bold tracking-[-0.015em] text-[#10231b] sm:text-xl">
                             Perkembangan Smart City
@@ -250,7 +250,7 @@
                         }
                     @endphp
                     <div class="mt-5 overflow-hidden rounded-lg border border-[#d6ded7] bg-white">
-                        <ol class="divide-y divide-[#e5ebe6]">
+                        <ol data-scroll-stagger class="divide-y divide-[#e5ebe6]">
                             @foreach ($smartCity['indeks_tahunan'] as $indeks)
                                 @php
                                     $catatanRaw = (string) ($indeks['catatan'] ?? '');
@@ -412,8 +412,8 @@
                 ->all();
             $matrixCount = count($matrixMods);
         @endphp
-        <div id="ekosistem" data-scroll-section data-scroll-fade-only class="mt-14 border-t border-[#d6ded7] pt-10">
-            <div class="border-b border-[#d6ded7] pb-5">
+        <div id="ekosistem" data-scroll-section class="mt-14 border-t border-[#d6ded7] pt-10">
+            <div data-scroll-reveal class="border-b border-[#d6ded7] pb-5">
                 <div class="max-w-3xl">
                     <h3 class="font-display text-xl font-bold tracking-[-0.02em] text-[#10231b] sm:text-2xl">
                         Dashboard Monitoring, SKM &amp; Keamanan Siber
@@ -425,7 +425,7 @@
             </div>
 
             @if ($loginMod || $skmMod)
-                <div class="mt-6 grid gap-5 lg:grid-cols-12">
+                <div data-scroll-stagger class="mt-6 grid gap-5 lg:grid-cols-12">
                     {{-- Anchor Gelap: Portal Login & Admin (497 Akun Peran) --}}
                     @if ($loginMod)
                         @php
@@ -642,7 +642,7 @@
             {{-- Matriks Kanal Terintegrasi (4 Modul dengan Pembatas Hairline & Ritme Aksi Sejajar) --}}
             @if ($matrixCount > 0)
                 <div class="mt-5 overflow-hidden rounded-xl border border-[#d6ded7] bg-white">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 {{ $matrixCount === 3 ? 'lg:grid-cols-3' : ($matrixCount >= 4 ? 'lg:grid-cols-4' : '') }}">
+                    <div data-scroll-stagger class="grid grid-cols-1 sm:grid-cols-2 {{ $matrixCount === 3 ? 'lg:grid-cols-3' : ($matrixCount >= 4 ? 'lg:grid-cols-4' : '') }}">
                         @foreach ($matrixMods as $mod)
                             @php
                                 $kode = $mod['kode'] ?? '';

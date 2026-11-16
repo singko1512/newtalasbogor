@@ -11,3 +11,9 @@ yarn-error.log
 Homestead.json
 Homestead.yaml
 auth.json
+
+.claude/
+.cursor/
+.agents/
+.mcp.json
+boost.json

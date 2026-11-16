@@ -5,9 +5,9 @@
 @endphp
 
 <section id="lacak-tiket" aria-labelledby="lacak-tiket-judul" class="border-b border-[#d6ded7] bg-[#edf2ed] py-14 lg:py-20">
-    <div data-scroll-section data-scroll-fade-only class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div data-scroll-section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {{-- Header: Judul, Ringkasan & Aksi Autentikasi --}}
-        <div class="grid gap-6 border-b border-[#cfd9d2] pb-8 lg:grid-cols-12 lg:items-end lg:gap-10">
+        <div data-scroll-reveal class="grid gap-6 border-b border-[#cfd9d2] pb-8 lg:grid-cols-12 lg:items-end lg:gap-10">
             <div class="lg:col-span-7">
                 <p class="text-xs font-semibold text-[#784f14]">
                     Pengajuan Layanan &amp; Tiket Gangguan &middot; SOP 04
@@ -55,7 +55,7 @@
                         </span>
                     </div>
 
-                    <div class="mt-3 divide-y divide-[#e5ebe6] overflow-hidden rounded-xl border border-[#cfd9d2] bg-white">
+                    <div data-scroll-stagger class="mt-3 divide-y divide-[#e5ebe6] overflow-hidden rounded-xl border border-[#cfd9d2] bg-white">
                         @foreach ($portalRoles as $role)
                             @php
                                 $roleKey = $role['key'] ?? 'role-'.$loop->index;
@@ -136,7 +136,7 @@
                         <p class="mt-1 text-xs tabular-nums text-[#3f5249]">SOP 04 &middot; {{ $ticketService['mutu_baku'] }}</p>
                     @endif
 
-                    <ol class="mt-6">
+                    <ol data-scroll-stagger class="mt-6">
                         @foreach ($ticketHighlights as $tahap)
                             @php
                                 $parts = explode('. ', $tahap['judul'] ?? '', 2);

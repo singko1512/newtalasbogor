@@ -6,7 +6,7 @@
          data-active-tab="{{ $activeTab }}"
          data-web-category="{{ $activeWebCategory }}"
          data-per-page="{{ $perPage }}">
-        <div class="max-w-3xl">
+        <div class="max-w-3xl" data-scroll-reveal>
             <h2 id="direktori-judul" class="font-display text-2xl font-bold tracking-[-0.02em] text-[#10231b] sm:text-[1.875rem] sm:leading-[1.15]">
                 Direktori Aplikasi, Website &amp; Desa.id
             </h2>
@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        <div class="mt-7 overflow-hidden rounded-2xl border border-[#cfd9d2] bg-white shadow-[0_16px_40px_-24px_rgba(16,35,27,0.16)]">
+        <div data-scroll-reveal class="mt-7 overflow-hidden rounded-2xl border border-[#cfd9d2] bg-white shadow-[0_16px_40px_-24px_rgba(16,35,27,0.16)]">
             <div aria-hidden="true" class="h-[3px] w-full bg-[#1b4332]"></div>
 
             {{-- Dek Kontrol Utama: Tab Direktori Berindikator Geser + Pencarian --}}

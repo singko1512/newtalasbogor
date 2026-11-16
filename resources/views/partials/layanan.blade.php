@@ -24,11 +24,11 @@
 
 <script id="talas-services-json" type="application/json">@json($servicesJson)</script>
 
-<section id="layanan" aria-labelledby="layanan-judul" class="border-b border-[#d6ded7] bg-[#f8faf8] py-14 lg:py-20">
+<section id="layanan" data-scroll-section aria-labelledby="layanan-judul" class="border-b border-[#d6ded7] bg-[#f8faf8] py-14 lg:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid gap-8 lg:grid-cols-12 lg:gap-10">
             {{-- Panel Kiri Sticky: Indeks Kategori & Desk Layanan --}}
-            <div data-scroll-section class="lg:col-span-4 lg:sticky lg:top-24 lg:self-start">
+            <div data-scroll-reveal="fade" class="lg:col-span-4 lg:sticky lg:top-24 lg:self-start">
                 <h2 id="layanan-judul" class="font-display text-2xl font-bold tracking-[-0.02em] text-[#10231b] sm:text-[1.875rem] sm:leading-[1.15]">
                     Layanan TALAS BOGOR
                 </h2>
@@ -112,7 +112,7 @@
 
             {{-- Panel Kanan: Lembar Katalog Dua-Zona + Sorotan Pemulihan Insiden --}}
             <div class="min-w-0 overflow-x-clip lg:col-span-8">
-                <div data-service-list class="grid grid-cols-1 gap-5 md:grid-cols-2">
+                <div data-service-list data-scroll-stagger class="grid grid-cols-1 gap-5 md:grid-cols-2">
                     @foreach ($layananUtama as $index => $item)
                         @php
                             $filterGroup = $item['filter_group'] ?? 'domain';

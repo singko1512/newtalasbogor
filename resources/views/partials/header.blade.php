@@ -2,19 +2,20 @@
         class="talas-header talas-transition sticky top-0 z-40 border-b border-[#d6ded7] bg-white/98 text-[#10231b] shadow-[0_1px_2px_rgba(16,35,27,0.05)]">
     <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2.5 sm:px-6 lg:px-8">
         <a href="#konten-utama"
-           class="group flex min-h-[44px] min-w-0 items-center gap-3 rounded-lg pr-2">
-            {{-- Lambang Resmi Pemerintah Kabupaten Bogor & Diskominfo --}}
-            <img src="{{ asset('images/logo-pemkab-bogor.png') }}"
+           class="group flex min-h-[44px] min-w-0 items-center gap-3 rounded-lg pr-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b4332]">
+            {{-- Lambang Resmi Diskominfo Kabupaten Bogor --}}
+            <img src="{{ asset('images/logo-diskominfo-bogorkab.png') }}"
                  alt="Logo Diskominfo Kabupaten Bogor"
-                 width="36"
-                 height="42"
-                 class="h-9 w-auto shrink-0 object-contain drop-shadow-xs">
+                 width="140"
+                 height="36"
+                 class="h-8 sm:h-9 w-auto shrink-0 object-contain drop-shadow-xs">
+            <span class="hidden h-5 w-px bg-[#d6ded7] sm:inline-block" aria-hidden="true"></span>
             <span class="min-w-0">
-                <span class="font-display block text-base font-bold leading-tight tracking-tight text-[#10231b] sm:text-[17px]">
+                <span class="font-display block text-sm sm:text-base font-bold leading-tight tracking-tight text-[#10231b]">
                     Talas Bogor
                 </span>
-                <span class="block text-xs font-medium leading-tight text-[#3f5249]">
-                    Diskominfo Kab. Bogor
+                <span class="block text-[11px] sm:text-xs font-medium leading-tight text-[#3f5249]">
+                    Kabupaten Bogor
                 </span>
             </span>
         </a>

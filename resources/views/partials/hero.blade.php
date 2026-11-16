@@ -1,25 +1,28 @@
-<section aria-labelledby="hero-judul"
+<section id="hero"
+         data-scroll-section
+         data-hero-container
+         aria-labelledby="hero-judul"
          class="relative flex flex-col justify-center overflow-hidden border-b border-[#0b2017] bg-[#0b2017] py-8 sm:py-11 lg:min-h-[calc(100dvh-4.25rem)] lg:py-14">
     {{-- Foto Latar Arsitektural Penuh Hero --}}
     <img src="{{ asset('images/hero-bogor.webp') }}"
          alt=""
          aria-hidden="true"
          fetchpriority="high"
-         class="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-95">
-    <div aria-hidden="true" class="talas-hero-scrim pointer-events-none absolute inset-0"></div>
+         data-parallax-hero-bg
+         class="pointer-events-none absolute inset-x-0 -top-[15%] h-[135%] w-full object-cover object-center opacity-95 will-change-transform">
+    <div aria-hidden="true" data-parallax-hero-scrim class="talas-hero-scrim pointer-events-none absolute inset-0"></div>
 
-    <div class="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div data-parallax-hero-content class="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 will-change-transform">
         <div class="grid items-center gap-8 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:gap-10 xl:gap-12">
             {{-- Kolom Kiri: Identitas Instansi, Judul Utama, Ringkasan, & Aksi Utama --}}
             <div class="min-w-0 text-left text-white">
-                <div data-hero-stagger class="flex flex-wrap items-center gap-x-3 gap-y-2">
-                    <span class="inline-flex shrink-0 items-center rounded-md bg-white/95 px-2.5 py-1 shadow-xs">
-                        <img src="{{ asset('images/logo-diskominfo-bogorkab.png') }}"
-                             alt="Diskominfo Kabupaten Bogor"
-                             width="148"
-                             height="35"
-                             class="h-5 w-auto object-contain">
-                    </span>
+                <div data-hero-stagger class="flex flex-wrap items-center gap-x-3.5 gap-y-2">
+                    <img src="{{ asset('images/logo-diskominfo-bogorkab.png') }}"
+                         alt="Diskominfo Kabupaten Bogor"
+                         width="160"
+                         height="40"
+                         class="h-7 sm:h-8 w-auto shrink-0 object-contain drop-shadow-sm">
+                    <span class="hidden h-4 w-px bg-white/30 sm:inline-block" aria-hidden="true"></span>
                     <span class="text-xs font-medium leading-snug text-[#d9e5dd] sm:text-[13px]">
                         {{ $meta['instansi'] }}
                     </span>

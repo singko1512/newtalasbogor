@@ -263,235 +263,143 @@ function initScrollSections() {
         return noopController;
     }
 
-    const REVEAL_TOP = 72;
-    const REVEAL_BOTTOM = 16;
-    const HIDE_TOP = 24;
-    const HIDE_BOTTOM = 28;
-    const ENTER_OFFSET = 14;
-    const EXIT_OFFSET = 10;
-
     const states = new WeakMap();
-    const animations = new WeakMap();
-    const tokens = new WeakMap();
-
     let isSuspended = false;
     let protectedSection = null;
 
-    const getMotionTargetInfo = (el) => {
-        const fadeOnly = el.hasAttribute('data-scroll-fade-only');
-        const glideNodes = fadeOnly ? Array.from(el.querySelectorAll('[data-scroll-glide]')) : [];
-        return { fadeOnly, glideNodes };
-    };
+    const getRevealNodes = (section) => Array.from(section.querySelectorAll('[data-scroll-reveal]'));
+    const getStaggerContainers = (section) => Array.from(section.querySelectorAll('[data-scroll-stagger]'));
 
-    const isRectInRevealBand = (rect) => {
-        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-        const effectiveBottom = Math.max(REVEAL_TOP + 1, viewportHeight - REVEAL_BOTTOM);
-        return rect.bottom > REVEAL_TOP && rect.top < effectiveBottom;
-    };
-
-    const isRectInHideBand = (rect) => {
-        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-        return rect.bottom > HIDE_TOP && rect.top < viewportHeight + HIDE_BOTTOM;
-    };
-
-    const nextToken = (el) => {
-        const token = (tokens.get(el) || 0) + 1;
-        tokens.set(el, token);
-        return token;
-    };
-
-    const stopSectionAnimations = (el) => {
-        const active = animations.get(el);
-        if (!active) {
+    const setSectionVisible = (section, immediate = false) => {
+        if (states.get(section) === 'visible') {
             return;
         }
-        active.forEach((anim) => anim.stop());
-        animations.delete(el);
-    };
+        states.set(section, 'visible');
 
-    const clearSectionStyles = (el, fadeOnly, glideNodes) => {
-        el.style.opacity = '';
-        el.style.willChange = '';
-        if (!fadeOnly) {
-            el.style.transform = '';
-            return;
-        }
-        glideNodes.forEach((node) => {
-            node.style.transform = '';
-            node.style.willChange = '';
-        });
-    };
+        const revealNodes = getRevealNodes(section);
+        const staggerContainers = getStaggerContainers(section);
+        const isFadeOnly = section.hasAttribute('data-scroll-fade-only');
 
-    const setSectionInstantState = (el, visible, rect) => {
-        const { fadeOnly, glideNodes } = getMotionTargetInfo(el);
-        states.set(el, visible ? 'visible' : 'hidden');
-        if (visible) {
-            clearSectionStyles(el, fadeOnly, glideNodes);
-            return;
-        }
-        const offset = rect.top < REVEAL_TOP ? -ENTER_OFFSET : ENTER_OFFSET;
-        el.style.opacity = '0';
-        el.style.willChange = '';
-        if (!fadeOnly) {
-            el.style.transform = `translateY(${offset}px)`;
-            return;
-        }
-        glideNodes.forEach((node) => {
-            node.style.transform = `translateY(${offset}px)`;
-            node.style.willChange = '';
-        });
-    };
-
-    const animateSection = (el, visible, rect) => {
-        if (!visible && protectedSection === el) {
-            return;
-        }
-
-        const targetState = visible ? 'visible' : 'hidden';
-        if (states.get(el) === targetState) {
-            return;
-        }
-        states.set(el, targetState);
-
-        stopSectionAnimations(el);
-
-        const { fadeOnly, glideNodes } = getMotionTargetInfo(el);
-        const token = nextToken(el);
-        const opacityRaw = Number.parseFloat(getComputedStyle(el).opacity);
-        const currentOpacity = Number.isFinite(opacityRaw) ? opacityRaw : (visible ? 0 : 1);
-
-        if (visible) {
-            const fromDir = rect.top < REVEAL_TOP ? -ENTER_OFFSET : ENTER_OFFSET;
-            const fromOpacity = currentOpacity <= 0.02 ? 0 : currentOpacity;
-            const revealTiming = { duration: 0.56, ease: [0.16, 1, 0.3, 1] };
-            const animList = [];
-
-            if (fadeOnly) {
-                el.style.willChange = 'opacity';
-                animList.push(animate(el, { opacity: [fromOpacity, 1] }, revealTiming));
-                glideNodes.forEach((node) => {
-                    const fromY = currentOpacity <= 0.02 ? fromDir : getComputedTranslate(node, 'y');
-                    node.style.willChange = 'transform';
-                    animList.push(animate(node, { y: [fromY, 0] }, revealTiming));
+        if (immediate || prefersReducedMotion()) {
+            section.style.opacity = '';
+            section.style.transform = '';
+            revealNodes.forEach((node) => {
+                node.style.opacity = '';
+                node.style.transform = '';
+            });
+            staggerContainers.forEach((container) => {
+                Array.from(container.children).forEach((child) => {
+                    child.style.opacity = '';
+                    child.style.transform = '';
                 });
-            } else {
-                const fromY = currentOpacity <= 0.02 ? fromDir : getComputedTranslate(el, 'y');
-                el.style.willChange = 'opacity, transform';
-                animList.push(animate(el, { opacity: [fromOpacity, 1], y: [fromY, 0] }, revealTiming));
+            });
+            return;
+        }
+
+        const revealTiming = { duration: 0.52, ease: [0.16, 1, 0.3, 1] };
+
+        if (revealNodes.length > 0 || staggerContainers.length > 0) {
+            section.style.opacity = '1';
+
+            if (revealNodes.length > 0) {
+                animate(
+                    revealNodes,
+                    { opacity: [0.08, 1], y: [16, 0] },
+                    { duration: 0.48, delay: stagger(0.055), ease: [0.16, 1, 0.3, 1] },
+                ).then(() => {
+                    revealNodes.forEach((node) => {
+                        node.style.opacity = '';
+                        node.style.transform = '';
+                    });
+                });
             }
 
-            animations.set(el, animList);
-
-            Promise.all(animList.map((anim) => Promise.resolve(anim))).then(() => {
-                if (tokens.get(el) !== token) {
+            staggerContainers.forEach((container) => {
+                const items = Array.from(container.children).filter((item) => !item.classList.contains('hidden'));
+                if (!items.length) {
                     return;
                 }
-                animations.delete(el);
-                // Kosongkan transform setelah settle agar sticky ancestor tetap berfungsi penuh
-                clearSectionStyles(el, fadeOnly, glideNodes);
-            });
-            return;
-        }
-
-        const exitY = rect.top < REVEAL_TOP ? -EXIT_OFFSET : EXIT_OFFSET;
-        const exitTiming = { duration: 0.32, ease: [0.32, 0.72, 0, 1] };
-        const animList = [];
-
-        if (fadeOnly) {
-            el.style.willChange = 'opacity';
-            animList.push(animate(el, { opacity: [currentOpacity, 0] }, exitTiming));
-            glideNodes.forEach((node) => {
-                node.style.willChange = 'transform';
-                animList.push(animate(node, { y: [getComputedTranslate(node, 'y'), exitY] }, exitTiming));
+                animate(
+                    items,
+                    { opacity: [0.08, 1], y: [20, 0] },
+                    { duration: 0.44, delay: stagger(0.045), ease: [0.16, 1, 0.3, 1] },
+                ).then(() => {
+                    items.forEach((item) => {
+                        item.style.opacity = '';
+                        item.style.transform = '';
+                    });
+                });
             });
         } else {
-            el.style.willChange = 'opacity, transform';
-            animList.push(animate(el, { opacity: [currentOpacity, 0], y: [getComputedTranslate(el, 'y'), exitY] }, exitTiming));
-        }
-
-        animations.set(el, animList);
-
-        Promise.all(animList.map((anim) => Promise.resolve(anim))).then(() => {
-            if (tokens.get(el) !== token) {
-                return;
-            }
-            animations.delete(el);
-            el.style.willChange = '';
-            glideNodes.forEach((node) => {
-                node.style.willChange = '';
+            const animProps = isFadeOnly
+                ? { opacity: [0.1, 1] }
+                : { opacity: [0.1, 1], y: [16, 0] };
+            animate(section, animProps, revealTiming).then(() => {
+                section.style.opacity = '';
+                section.style.transform = '';
             });
-        });
+        }
     };
 
-    const syncSections = () => {
-        sections.forEach((section) => {
-            const rect = section.getBoundingClientRect();
-            const currentState = states.get(section);
-            if (currentState !== 'visible' && isRectInRevealBand(rect)) {
-                animateSection(section, true, rect);
-            } else if (currentState === 'visible' && !isRectInHideBand(rect)) {
-                animateSection(section, false, rect);
-            }
-        });
+    const isRectInView = (rect) => {
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+        return rect.top < viewportHeight - 32 && rect.bottom > 32;
     };
 
+    // Pre-arm below-the-fold sections for smooth entrance
     sections.forEach((section) => {
         const rect = section.getBoundingClientRect();
-        setSectionInstantState(section, isRectInRevealBand(rect), rect);
+        if (isRectInView(rect)) {
+            states.set(section, 'visible');
+        } else {
+            states.set(section, 'hidden');
+            const revealNodes = getRevealNodes(section);
+            const staggerContainers = getStaggerContainers(section);
+            const isFadeOnly = section.hasAttribute('data-scroll-fade-only');
+
+            if (revealNodes.length > 0 || staggerContainers.length > 0) {
+                revealNodes.forEach((node) => {
+                    node.style.opacity = '0';
+                    node.style.transform = 'translateY(16px)';
+                });
+                staggerContainers.forEach((container) => {
+                    Array.from(container.children).forEach((child) => {
+                        child.style.opacity = '0';
+                        child.style.transform = 'translateY(20px)';
+                    });
+                });
+            } else {
+                section.style.opacity = '0';
+                if (!isFadeOnly) {
+                    section.style.transform = 'translateY(16px)';
+                }
+            }
+        }
     });
 
-    // Dua observer terpisah memberi dead-zone histeresis sehingga pantulan trackpad tidak memicu kedip
-    const revealObserver = new IntersectionObserver(
+    const observer = new IntersectionObserver(
         (entries) => {
             if (isSuspended) {
                 return;
             }
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    animateSection(entry.target, true, entry.boundingClientRect);
+                    setSectionVisible(entry.target, false);
+                    observer.unobserve(entry.target);
                 }
             });
         },
         {
-            rootMargin: `-${REVEAL_TOP}px 0px -${REVEAL_BOTTOM}px 0px`,
-            threshold: 0,
-        },
-    );
-
-    const hideObserver = new IntersectionObserver(
-        (entries) => {
-            if (isSuspended) {
-                return;
-            }
-            entries.forEach((entry) => {
-                if (!entry.isIntersecting && states.get(entry.target) === 'visible') {
-                    animateSection(entry.target, false, entry.boundingClientRect);
-                }
-            });
-        },
-        {
-            rootMargin: `-${HIDE_TOP}px 0px ${HIDE_BOTTOM}px 0px`,
+            rootMargin: '0px 0px -8% 0px',
             threshold: 0,
         },
     );
 
     sections.forEach((section) => {
-        revealObserver.observe(section);
-        hideObserver.observe(section);
-    });
-
-    let resizeFrame = 0;
-    window.addEventListener('resize', () => {
-        if (resizeFrame) {
-            return;
+        if (states.get(section) !== 'visible') {
+            observer.observe(section);
         }
-        resizeFrame = window.requestAnimationFrame(() => {
-            resizeFrame = 0;
-            if (!isSuspended) {
-                syncSections();
-            }
-        });
-    }, { passive: true });
+    });
 
     document.addEventListener('focusin', (event) => {
         if (!(event.target instanceof Element)) {
@@ -499,7 +407,8 @@ function initScrollSections() {
         }
         const section = event.target.closest('[data-scroll-section]');
         if (section && states.get(section) === 'hidden') {
-            animateSection(section, true, section.getBoundingClientRect());
+            setSectionVisible(section, true);
+            observer.unobserve(section);
         }
     });
 
@@ -507,20 +416,74 @@ function initScrollSections() {
         beginJump(targetSection) {
             isSuspended = true;
             protectedSection = targetSection || null;
+            if (targetSection) {
+                setSectionVisible(targetSection, true);
+                observer.unobserve(targetSection);
+            }
         },
         revealNow(targetSection) {
             if (!targetSection) {
                 return;
             }
             protectedSection = targetSection;
-            animateSection(targetSection, true, targetSection.getBoundingClientRect());
+            setSectionVisible(targetSection, true);
+            observer.unobserve(targetSection);
         },
         endJump() {
             isSuspended = false;
             protectedSection = null;
-            syncSections();
         },
     };
+}
+
+function initHeroParallax() {
+    const heroBg = document.querySelector('[data-parallax-hero-bg]');
+    const heroContainer = document.querySelector('[data-hero-container]');
+    const heroContent = document.querySelector('[data-parallax-hero-content]');
+    const heroScrim = document.querySelector('[data-parallax-hero-scrim]');
+
+    if (!heroBg || !heroContainer || prefersReducedMotion()) {
+        return;
+    }
+
+    let isTicking = false;
+
+    const updateParallax = () => {
+        const scrollY = window.scrollY;
+        const heroHeight = heroContainer.offsetHeight || 650;
+
+        if (scrollY <= heroHeight + 120) {
+            const progress = Math.min(1, Math.max(0, scrollY / heroHeight));
+
+            // Optical parallax: background image travels at 0.36x scroll delta with subtle depth scale
+            const bgTranslateY = scrollY * 0.36;
+            const bgScale = 1.05 + progress * 0.05;
+            heroBg.style.transform = `translate3d(0, ${bgTranslateY.toFixed(2)}px, 0) scale(${bgScale.toFixed(3)})`;
+
+            // Foreground content shifts gently at 0.08x scroll delta
+            if (heroContent) {
+                const contentTranslateY = scrollY * 0.08;
+                const contentOpacity = Math.max(0.12, 1 - progress * 1.08);
+                heroContent.style.transform = `translate3d(0, ${contentTranslateY.toFixed(2)}px, 0)`;
+                heroContent.style.opacity = contentOpacity.toFixed(3);
+            }
+
+            // Scrim deepens smoothly as user scrolls towards lower sections
+            if (heroScrim) {
+                heroScrim.style.opacity = (0.86 + progress * 0.14).toFixed(3);
+            }
+        }
+        isTicking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+        if (!isTicking) {
+            window.requestAnimationFrame(updateParallax);
+            isTicking = true;
+        }
+    }, { passive: true });
+
+    updateParallax();
 }
 
 function initScrollProgress() {
@@ -880,13 +843,44 @@ function initMotionEntrance() {
         if (!Number.isFinite(target) || target <= 0) {
             return;
         }
-        animate(0, target, {
-            duration: 0.85,
-            ease: [0.16, 1, 0.3, 1],
-            onUpdate: (latest) => {
-                el.textContent = Math.round(latest).toLocaleString('id-ID');
+        let played = false;
+        inView(
+            el,
+            () => {
+                if (played) {
+                    return;
+                }
+                played = true;
+                animate(0, target, {
+                    duration: 0.85,
+                    ease: [0.16, 1, 0.3, 1],
+                    onUpdate: (latest) => {
+                        el.textContent = Math.round(latest).toLocaleString('id-ID');
+                    },
+                });
             },
-        });
+            { amount: 0.25 },
+        );
+    });
+
+    const domainBars = Array.from(document.querySelectorAll('[data-domain-progress]'));
+    domainBars.forEach((bar, index) => {
+        const targetWidth = bar.getAttribute('data-domain-progress');
+        if (!targetWidth) {
+            return;
+        }
+        bar.style.width = '0%';
+        inView(
+            bar,
+            () => {
+                animate(
+                    bar,
+                    { width: ['0%', targetWidth] },
+                    { duration: 0.65, delay: Math.min(index * 0.05, 0.25), ease: [0.16, 1, 0.3, 1] },
+                );
+            },
+            { amount: 0.2 },
+        );
     });
 
     const progressBars = Array.from(document.querySelectorAll('[data-progress-bar]'));
@@ -2354,6 +2348,7 @@ const init = () => {
 
     initSmoothNavigation(smoothScrollTo, closeMobileNav);
     initScrollProgress();
+    initHeroParallax();
     initHeaderSurface();
     initHeaderScrollSpy();
     initHeroQuickTabs(setDirectoryTab, smoothScrollTo);
